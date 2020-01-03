@@ -1,33 +1,25 @@
 {
-  "name": "greaser",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "history": "^4.10.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.2.0",
-    "react-router-dom": "^5.1.0"
-  },
+  "name": "authservice",
+  "version": "1.0.0",
+  "description": "Authentication server for optima tool",
+  "main": "app.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "nodemon app.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run start\" \"npm run client\""
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.3.4",
+    "mongoose": "^5.7.12",
+    "nodemon": "^2.0.1",
+    "validator": "^12.0.0"
   }
 }

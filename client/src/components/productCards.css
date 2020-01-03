@@ -1,0 +1,22 @@
+.product{
+    padding:10px;
+}
+
+.productimg{
+    margin-top: 40px;
+}
+
+.product-img{
+    margin-top: 50px;
+    display: flex;
+}
+.btn-right{
+    float:right;
+}
+
+.padding-rt{
+    margin-right: 50px
+}
+.padding-rt1{
+    margin-left: 80px
+}
