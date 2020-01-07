@@ -23,8 +23,9 @@ code {
 }
 
 .label-text{
-  width: 100px;
+  width: 110px;
   font-size: 20px;
+  margin-top: auto;
 }
 
 .login-submit{
@@ -37,6 +38,10 @@ code {
 
 .login-row{
   margin:20px;
+}
+
+.signup-row{
+  margin:10px;
 }
 
 .modal-body{
@@ -59,6 +64,20 @@ input{
   margin-left:500px !important;
 }
 
+.modalHeader{
+  width: 50%;
+  height:65px;
+}
+
+.ui.modal>.header{
+  padding: 0px;
+}
+
 .ui.modal>.content{
- margin-left: 70px;
+  padding-left: 60px;
+}
+
+.register:hover{
+  color:blue;
+  cursor: pointer;
 }

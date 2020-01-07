@@ -11,6 +11,7 @@ class HeaderComponent extends Component {
         super(props);
         this.state = {
             open: false,
+            signup: false
         }
     }
 
@@ -67,23 +68,22 @@ class HeaderComponent extends Component {
         this.props.logout();
     }
 
-    render() {
-
-        const { open } = this.state;
-        //console.log(this.state.open, "modal ")
-
-        let modal = (
-            <div>
-                <Modal className="loginModal" size="tiny" open={open} onClose={() => this.close()}>
-                    <Modal.Header>Login</Modal.Header>
-                    <Modal.Content>
-                        <div className="login-row">
+    modalType(value){
+        if(value === "signup")
+            this.setState({ signup: true })
+        else
+        this.setState({ signup: false })
+    }
+    loginContent=()=>{
+        return(
+            <Modal.Content>
+                        <div className="ui input login-row">
                             <label className="label-text">User Id</label>
-                            <input type="text" id="userId" placeholder="Enter your email Id" autoFocus></input>
+                            <Input type="text" id="userId" autofocus placeholder="Enter your email Id..." /> 
                         </div>
-                        <div className="login-row">
+                        <div className="ui input login-row">
                             <label className="label-text">Password</label>
-                            <input type="password" id="password" placeholder="Enter your password"></input>
+                            <Input type="password" id="password" placeholder="Enter your password"></Input>
                         </div>
                         {
                             (this.props.user.error) ? this.loginError() : null
@@ -94,13 +94,69 @@ class HeaderComponent extends Component {
                             <button negative type="button" className="btn btn-outline-danger login-cancel" onClick={() => this.close()}>Close</button>
                         </div>
                         <div className="login-row">
-                            <p className='register'>New User? <a href='/'>click here to signup</a></p>
+                            <p className='register'>New User? <u onClick={() => this.modalType("signup")}>click here to signup</u></p>
                         </div>
                     </Modal.Content>
-                </Modal>
-                {
+        )
+    }
 
-                }
+    signupContent=()=>{
+        return(
+            <Modal.Content>
+                        <div className="ui input signup-row">
+                            <label className="label-text">User Id</label>
+                            <Input type="text" id="userId" autofocus placeholder="Enter your email Id..." /> 
+                        </div>
+                        <div className="ui input signup-row">
+                            <label className="label-text">First Name</label>
+                            <Input type="text" id="firstName" autofocus placeholder="Enter your First Name..." /> 
+                        </div>
+                        <div className="ui input signup-row">
+                            <label className="label-text">Last Name</label>
+                            <Input type="text" id="lastName" autofocus placeholder="Enter your Last Name..." /> 
+                        </div>
+                        <div className="ui input signup-row">
+                            <label className="label-text">Location</label>
+                            <Input type="text" id="location" autofocus placeholder="Enter your Location..." /> 
+                        </div>
+                        <div className="ui input signup-row">
+                            <label className="label-text">Mobile</label>
+                            <Input type="text" id="mobile" autofocus placeholder="Enter your Mobile No..." /> 
+                        </div>
+                        <div className="ui input signup-row">
+                            <label className="label-text">Password</label>
+                            <Input type="password" id="password" placeholder="Enter your password"></Input>
+                        </div>
+                        {/* {
+                            (this.props.user.error) ? this.loginError() : null
+                        } */}
+
+                        <div className="login-row">
+                            <button positive type="button" className="btn btn-outline-success login-submit" onClick={this.onLogin}>Submit</button>
+                            <button negative type="button" className="btn btn-outline-danger login-cancel" onClick={() => this.close()}>Close</button>
+                        </div>
+                        <div className="login-row">
+                            <p className='register'>New User? <u onClick={() => this.modalType("signup")}>click here to signup</u></p>
+                        </div>
+                    </Modal.Content>
+        )
+    }
+
+    render() {
+
+        const { open, signup } = this.state;
+
+        let modal = (
+            <div>
+                <Modal className="loginModal" size="tiny" open={open} onClose={() => this.close()}>
+                    <Modal.Header>
+                       <button type="button" className="modalHeader" onClick={() => this.modalType("login")}>Login</button> 
+                       <button type="button" className="modalHeader" onClick={() => this.modalType("signup")}>Signup</button> 
+                    </Modal.Header>
+                    {
+                        (signup)?this.signupContent():this.loginContent()
+                    }
+                </Modal>
             </div>
         )
         return (

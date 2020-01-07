@@ -21,9 +21,9 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Switch>
-                <Route exact path='/' render={() => <Header><Home /></Header>}></Route>
-                <Route exact path='/product' render={() => <Header><Product /></Header>}></Route>
-                <Route exact path='/updateProduct' render={() => <Header><UpdateProduct /></Header>}></Route>
+                <Route exact path='/admin' render={() => <Header><Home /></Header>}></Route>
+                <Route exact path='/admin/product' render={() => <Header><Product /></Header>}></Route>
+                <Route exact path='/admin/updateProduct' render={() => <Header><UpdateProduct /></Header>}></Route>
                 {/* <Route exact path='/product/:id' render={()=><Header><Quote /></Header>}></Route> */}
             </Switch>
         </Router>
