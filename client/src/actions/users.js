@@ -1,6 +1,6 @@
 import * as services from '../services/index';
 
-import { LOGIN_SUCCESS, LOGIN_FAILED } from '../constants/constants.js'
+import { LOGIN_SUCCESS, LOGIN_FAILED, SIGNUP_SUCCESS, SIGNUP_FAILED } from '../constants/constants.js'
 
 
 export function login(userId, password) {
@@ -43,5 +43,26 @@ export function logout() {
    }
 }
 
+export function signup(bodyData) {
+   return dispatch => {
+
+      services.signupService(bodyData)
+         .then(userData => {
+            sessionStorage.setItem("registered", "successful");
+            window.location.reload();
+            dispatch(signupSuccess(userData), console.log("called in users action", userData))
+         }
+         )
+         .catch(e => {
+            dispatch(signupFail(e.message))
+            console.log(e.message)
+         })
+
+   }
+}
+
 function loginSuccess(userData) { return { type: LOGIN_SUCCESS, userData } }
 function loginFail(error) { return { type: LOGIN_FAILED, error } }
+
+function signupSuccess(userData) { return { type: SIGNUP_SUCCESS, userData } }
+function signupFail(error) { return { type: SIGNUP_FAILED, error } }

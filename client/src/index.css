@@ -81,3 +81,9 @@ input{
   color:blue;
   cursor: pointer;
 }
+
+.email-error{
+  color: crimson;
+  text-align:center;
+  padding: 0px;
+}

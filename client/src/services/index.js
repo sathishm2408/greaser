@@ -39,7 +39,28 @@ const logout=async(token)=>{
     return res;
 }
 
-export { getAllProducts, loginCall, logout};
+const signupService=async(bodyData)=>{
+  let res = await axios({
+    method: 'post',
+    url: 'http://localhost:3005/authService/users/signup',
+    data: {
+      emailId: bodyData.signupId,
+      firstName : bodyData.firstName,
+      lastName: bodyData.lastName,
+      location : bodyData.location,
+      mobileNumber: bodyData.mobile,
+      password : bodyData.signupPassword
+    },
+    headers:{'Content-Type':'application/json'}
+  })
+  .then((result)=>result.data)
+  .catch(e=>{
+      throw new Error(e.response.data.message);
+    });
+    return res;
+}
+
+export { getAllProducts, loginCall, logout, signupService};
 
 // async function register(user) {
 //     const res= await axios.post(config.registerUrl, user)
