@@ -10,7 +10,6 @@ export default class ProductCards extends Component {
                         <img className='card-img-top productimg' src={product_img} alt="products"></img>
                         <div className="card-body">
                             <h4 className='card-title'>{this.props.product.productName.toUpperCase()}</h4>
-                            <div className='card-text'>{this.props.product.Description}</div>
                             <b className='card-text'>Rs.{this.props.product.price}</b>
                             <p>
                                 <a href="/" className="btn btn-primary">View Product</a>
