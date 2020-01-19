@@ -20,3 +20,15 @@
 .padding-rt1{
     margin-left: 80px
 }
+
+.AddProduct-body{
+    text-align: center;
+}
+
+.AddProduct-field{
+    margin:10px;
+}
+
+.label-field{
+    width: 120px;
+}

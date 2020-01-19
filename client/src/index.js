@@ -8,7 +8,8 @@ import thunkMiddleware from 'redux-thunk';
 import Home from './components/Home'
 import Header from './components/Header';
 import rootReducer from './reducers/main';
-import Product from './components/Product'
+import Product from './components/Product';
+import AddProduct from './components/AddProduct';
 import UpdateProduct from './components/UpdateProduct'
 import * as serviceWorker from './serviceWorker';
 import './index.css'
@@ -23,6 +24,7 @@ ReactDOM.render(
             <Switch>
                 <Route exact path='/admin' render={() => <Header><Home /></Header>}></Route>
                 <Route exact path='/admin/product' render={() => <Header><Product /></Header>}></Route>
+                <Route exact path='/admin/AddProduct' render={() => <Header><AddProduct /></Header>}></Route>
                 <Route exact path='/admin/updateProduct' render={() => <Header><UpdateProduct /></Header>}></Route>
                 {/* <Route exact path='/product/:id' render={()=><Header><Quote /></Header>}></Route> */}
             </Switch>

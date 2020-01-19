@@ -222,13 +222,13 @@ class HeaderComponent extends Component {
                     <div className="collapse navbar-collapse" id="collapsibleNavbar">
                         <ul className="navbar-nav justify-content-center ml-auto">
                             <li className="nav-item">
-                                <a className="nav-link" href="/">Add Product</a>
+                                <a className="nav-link" href="/admin/Addproduct">Add Product</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/">Link</a>
+                                <a className="nav-link" href="/">Views</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/">Link</a>
+                                <a className="nav-link" href="/">Orders</a>
                             </li>
                         </ul>
                         {
