@@ -1,5 +1,5 @@
 .product{
-    margin:10px;
+    margin-bottom:15px;
 }
 
 .productimg{
@@ -31,4 +31,8 @@
 
 .label-field{
     width: 120px;
+}
+
+.filter{
+    background-color: gray;
 }

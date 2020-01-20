@@ -5,7 +5,7 @@ import './productCards.css';
 export default class ProductCards extends Component {
     render() {
         return (
-                <div className="col-lg-3 col-md-4 col-xs-12 product">
+                <div className="col-lg-4 col-md-4 col-xs-6">
                     <div className="card product">
                         <img className='card-img-top productimg' src={product_img} alt="products"></img>
                         <div className="card-body">
