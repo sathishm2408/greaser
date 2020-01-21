@@ -10,7 +10,7 @@ let ProductSchema = new mongoose.Schema({
         trim: true,
         lowercase: true
     },
-    Description: {
+    description: {
         type: String,
         required: true,
         trim: true

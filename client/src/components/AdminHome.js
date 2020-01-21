@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getAllProducts } from '../actions/product';
 import './productCards.css';
 
-class Home extends Component {
+class AdminHome extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -52,4 +52,4 @@ const mapStateToProps = (state) => ({
     allProducts: state.products.productData
 })
 
-export default connect(mapStateToProps, { getAllProducts })(Home)
+export default connect(mapStateToProps, { getAllProducts })(AdminHome)

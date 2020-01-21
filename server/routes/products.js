@@ -39,6 +39,8 @@ router.post('/add', auth,(req, res) => {
     });
 
     product.save().then(() => {
+        console.log("add product",product);
+        
         res.send({product});
     }).catch((err) => {
         if(err)

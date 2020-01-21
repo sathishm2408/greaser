@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
-import Home from './components/Home'
+import AdminHome from './components/AdminHome';
 import Header from './components/Header';
 import rootReducer from './reducers/main';
 import Product from './components/Product';
@@ -22,7 +22,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Switch>
-                <Route exact path='/admin' render={() => <Header><Home /></Header>}></Route>
+                <Route exact path='/admin' render={() => <Header><AdminHome /></Header>}></Route>
                 <Route exact path='/admin/product' render={() => <Header><Product /></Header>}></Route>
                 <Route exact path='/admin/AddProduct' render={() => <Header><AddProduct /></Header>}></Route>
                 <Route exact path='/admin/updateProduct' render={() => <Header><UpdateProduct /></Header>}></Route>
