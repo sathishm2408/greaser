@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 import { connect } from 'react-redux';
+//import history from 'history';
 import { Button, Header, Modal, Icon, Input } from 'semantic-ui-react';
 import { login, logout, signup } from '../actions/users';
 import '../index.css'
@@ -9,6 +11,11 @@ class HeaderComponent extends Component {
 
     constructor(props) {
         super(props);
+        //console.log("consssss",this.props);
+        
+        if (!sessionStorage.getItem('token'))
+           this.props.props.history.push('/admin')
+      
         this.state = {
             open: false,
             signup: false,
@@ -82,8 +89,11 @@ class HeaderComponent extends Component {
         const mobile = document.getElementById("mobile").value
         const signupPassword = document.getElementById("signupPassword").value
         let bodyData = {signupId, firstName, lastName, location, mobile, signupPassword}
+console.log(bodyData);
+
         console.log("!!!!!!!!!!!!onSignup", this.props);
-        this.props.signup(bodyData);
+        //this.props.signup(bodyData);
+        return false;
     }
 
     loginError = () => {
@@ -155,7 +165,7 @@ class HeaderComponent extends Component {
             <Modal.Content>
                         <div className="ui input signup-row">
                             <label className="label-text">User Id</label>
-                            <Input type="email" id="signupId" autoFocus placeholder="Enter your email Id..." onChange={(e)=> this.validateEmail(e.target.value)}/> 
+                            <Input type="email" id="signupId" autoFocus placeholder="Enter your email Id..." onChange={(e)=> this.validateEmail(e.target.value)} required/> 
                         </div>
                         {
                             (this.state.validEmail)? null : this.emailError()
@@ -174,18 +184,18 @@ class HeaderComponent extends Component {
                         </div>
                         <div className="ui input signup-row">
                             <label className="label-text">Mobile</label>
-                            <Input type="text" id="mobile" placeholder="Enter your Mobile No..." /> 
+                            <Input type="number" pattern="[7-9]{1}[0-9]{9}" id="mobile" placeholder="Enter your Mobile No..." required/> 
                         </div>
                         <div className="ui input signup-row">
                             <label className="label-text">Password</label>
-                            <Input type="password" id="signupPassword" placeholder="Enter your password"></Input>
+                            <Input type="password" id="signupPassword" placeholder="Enter your password" required></Input>
                         </div>
                         {
                             (this.props.user.error) ? this.loginError() : null
                         }
 
                         <div className="login-row">
-                            <button type="button" className="btn btn-outline-success login-submit" onClick={()=>this.onSignup()}>Submit</button>
+                            <button type="Submit" className="btn btn-outline-success login-submit" onSubmit={()=>this.onSignup()}>Submit</button>
                             <button type="button" className="btn btn-outline-danger login-cancel" onClick={() => this.close()}>Close</button>
                         </div>
                     </Modal.Content>
@@ -211,7 +221,7 @@ class HeaderComponent extends Component {
         )
         return (
             <div>
-                <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+                <nav className="navbar navbar-expand-md bg-dark navbar-dark edited">
 
                     <a className="navbar-brand" href="/">Product Inventory</a>
 

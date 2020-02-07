@@ -21,18 +21,20 @@
     margin-left: 80px
 }
 
-.AddProduct-body{
-    text-align: center;
-}
-
 .AddProduct-field{
     margin:15px;
 }
 
 .label-field{
-    width: 120px;
+    width: 10%;
 }
 
 .filter{
     background-color: gray;
+}
+
+.ui.styled.accordion {
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 2%;
 }

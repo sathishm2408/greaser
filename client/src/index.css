@@ -87,3 +87,7 @@ input{
   text-align:center;
   padding: 0px;
 }
+
+.edited{
+  line-height: 50px;
+}
