@@ -1,9 +1,16 @@
 import React, { Component } from 'react';
-
+import { connect } from 'react-redux';
 import { Figure, Card, Button } from 'react-bootstrap';
+import {getProductDetails} from '../actions/product'
 import './productCards.css';
 
-export default class Product extends Component {
+class Product extends Component {
+
+    UNSAFE_componentWillMount() {
+        console.log("Aaaaaaaaaaaaaaaa", this.props);
+        this.props.getProductDetails(this.props.props.match.params.id);
+    }
+
     render() {
         console.log("333333333 in cards", this.props)
         return (
@@ -41,3 +48,10 @@ export default class Product extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log("state", state)
+    return { productDetails: state.products.productData }
+}
+
+export default connect(mapStateToProps, { getProductDetails })(Product)

@@ -85,7 +85,39 @@ const addProduct = async (bodyData) => {
   return res;
 }
 
-export { getAllProducts, loginCall, logout, signupService, addProduct };
+const getViews = async () => {
+  let res = await axios({
+    method: 'get',
+    url: 'http://localhost:3005/products/views',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': sessionStorage.getItem('token')
+  }
+  })
+    .then((result) => result.data)
+    .catch(e => {
+      throw new Error(e.response.data.message);
+    });
+  return res;
+}
+
+const getProductDetails = async (id) => {
+  let res = await axios({
+    method: 'get',
+    url: `http://localhost:3005/products/${id}`,
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': sessionStorage.getItem('token')
+  }
+  })
+    .then((result) => result.data)
+    .catch(e => {
+      throw new Error(e.response.data.message);
+    });
+  return res;
+}
+
+export { getAllProducts, loginCall, logout, signupService, addProduct,getViews,getProductDetails };
 
 // async function register(user) {
 //     const res= await axios.post(config.registerUrl, user)

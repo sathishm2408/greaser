@@ -7,7 +7,7 @@ import { Button, Header, Modal, Icon, Input } from 'semantic-ui-react';
 import { login, logout, signup } from '../actions/users';
 import '../index.css'
 
-class HeaderComponent extends Component {
+class AdminHeaderComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -92,7 +92,7 @@ class HeaderComponent extends Component {
 console.log(bodyData);
 
         console.log("!!!!!!!!!!!!onSignup", this.props);
-        //this.props.signup(bodyData);
+        this.props.signup(bodyData);
         return false;
     }
 
@@ -195,7 +195,7 @@ console.log(bodyData);
                         }
 
                         <div className="login-row">
-                            <button type="Submit" className="btn btn-outline-success login-submit" onSubmit={()=>this.onSignup()}>Submit</button>
+                            <button type="button" className="btn btn-outline-success login-submit" onClick={()=>this.onSignup()}>Submit</button>
                             <button type="button" className="btn btn-outline-danger login-cancel" onClick={() => this.close()}>Close</button>
                         </div>
                     </Modal.Content>
@@ -223,7 +223,7 @@ console.log(bodyData);
             <div>
                 <nav className="navbar navbar-expand-md bg-dark navbar-dark edited">
 
-                    <a className="navbar-brand" href="/">Product Inventory</a>
+                    <a className="navbar-brand" href="/admin">Product Inventory</a>
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <span className="navbar-toggler-icon"></span>
@@ -235,7 +235,7 @@ console.log(bodyData);
                                 <a className="nav-link" href="/admin/Addproduct">Add Product</a>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/">Views</a>
+                                <a className="nav-link" href="/admin/views">Views</a>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="/">Orders</a>
@@ -261,4 +261,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { login, logout, signup })(HeaderComponent)
+export default connect(mapStateToProps, { login, logout, signup })(AdminHeaderComponent)

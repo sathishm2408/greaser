@@ -11,8 +11,11 @@ export default class ProductCards extends Component {
                         <div className="card-body">
                             <h4 className='card-title'>{this.props.product.productName.toUpperCase()}</h4>
                             <b className='card-text'>Rs.{this.props.product.price}</b>
+                            {
+                                (this.props.viewed)?<p className='card-text'>Views {this.props.product.viewed}</p>:null
+                            }
                             <p>
-                                <a href="/" className="btn btn-primary">View Product</a>
+                                <a href={`/admin/product/${this.props.product._id}`} className="btn btn-primary">View Product</a>
                             </p>
 
                         </div>
