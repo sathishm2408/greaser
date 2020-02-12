@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import ProductCards from './ProductCards';
 import { connect } from 'react-redux';
 import { getViews } from '../actions/product';
+import Chart from './Chart';
+
 import './productCards.css';
 
 class ProductViews extends Component {
@@ -17,14 +19,23 @@ class ProductViews extends Component {
         this.props.getViews();
     }
     render() {
-        let data = [];
+        let labels =[]
+        let data =[];
+        let datasets=[];
+        let productData = [];
+        let chartData;
         let allProducts = this.props.ViewedProducts;
         //console.log("44444444",allProducts);
         if (allProducts) {
-            data = allProducts.map((product) => {
+            productData = allProducts.map((product) => {
+                labels.push(product.productName)
+                data.push(Number(product.viewed));
                 return <ProductCards key={product._id} product={product} viewed={product} />
-
             })
+            datasets.push({label:"views",data,backgroundColor:['red','blue']});
+            console.log("ddddddd",{labels,datasets});
+            chartData = {labels,datasets};
+            
         }
 
 
@@ -36,11 +47,14 @@ class ProductViews extends Component {
                         <div className="col-lg-2 col-md-2 col-xs-0 filter"></div>
                         <div className="col-lg-10 col-md-10 col-xs-12">
                             <div className="row">
-                                {data}
+                                {productData}
                             </div>
                         </div>
-
                     </div>
+                    {
+                        (productData)?<Chart data={chartData}/>:null
+                    }
+                    
                 </div>
             </div>
         )
