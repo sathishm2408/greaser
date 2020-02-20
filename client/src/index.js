@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import AdminHome from './components/AdminHome';
-import AdminHeader from './components/Header';
+import AdminHeader from './components/AdminHeader';
 import rootReducer from './reducers/main';
 import Product from './components/Product';
 import AddProduct from './components/AddProduct';
@@ -23,13 +23,12 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Switch>
-                <Route exact path='/admin' render={(props) => <AdminHeader props ={props}><AdminHome /></AdminHeader>}></Route>
-                <Route exact path='/admin/product/:id' render={(props) => <AdminHeader props ={props}><Product props ={props} /></AdminHeader>}></Route>
-                <Route exact path='/admin/AddProduct' render={(props) => <AdminHeader props ={props}><AddProduct /></AdminHeader>}></Route>
+                <Route exact path='/admin' render={() => <AdminHeader><AdminHome /></AdminHeader>}></Route>
+                <Route exact path='/admin/product/:id' render={() => <AdminHeader><Product/></AdminHeader>}></Route>
+                <Route exact path='/admin/AddProduct' render={() => <AdminHeader><AddProduct /></AdminHeader>}></Route>
                 <Route exact path='/admin/updateProduct' render={() => <AdminHeader><UpdateProduct /></AdminHeader>}></Route>
                 <Route exact path='/admin/views' render={() => <AdminHeader><ProductViews /></AdminHeader>}></Route>
                 
-                {/* <Route exact path='/product/:id' render={()=><Header><Quote /></Header>}></Route> */}
             </Switch>
         </Router>
     </Provider>,

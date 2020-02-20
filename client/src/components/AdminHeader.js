@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import { Link } from 'react-router-dom';
 import { Redirect } from "react-router-dom";
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 //import history from 'history';
 import { Button, Header, Modal, Icon, Input } from 'semantic-ui-react';
@@ -14,7 +15,7 @@ class AdminHeaderComponent extends Component {
         //console.log("consssss",this.props);
 
         if (!sessionStorage.getItem('token'))
-            this.props.props.history.push('/admin')
+            this.props.history.push('/admin')
 
         this.state = {
             open: false,
@@ -267,4 +268,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps, { login, logout, signup })(AdminHeaderComponent)
+export default connect(mapStateToProps, { login, logout, signup })(withRouter(AdminHeaderComponent))

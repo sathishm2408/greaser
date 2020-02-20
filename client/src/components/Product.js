@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Figure, Card, Button } from 'react-bootstrap';
 import {getProductDetails} from '../actions/product'
@@ -8,7 +9,7 @@ class Product extends Component {
 
     UNSAFE_componentWillMount() {
         console.log("Aaaaaaaaaaaaaaaa", this.props);
-        this.props.getProductDetails(this.props.props.match.params.id);
+        this.props.getProductDetails(this.props.match.params.id);
     }
 
     render() {
@@ -54,4 +55,4 @@ const mapStateToProps = (state) => {
     return { productDetails: state.products.productData }
 }
 
-export default connect(mapStateToProps, { getProductDetails })(Product)
+export default connect(mapStateToProps, { getProductDetails })(withRouter(Product))
