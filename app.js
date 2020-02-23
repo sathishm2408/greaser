@@ -10,10 +10,10 @@ app.use(cors())
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({
-//   extended: false
-// }));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 
 app.use('/authService', authRouter);
 app.use('/products', productRouter);

@@ -12,8 +12,10 @@ export default class Chart extends Component {
         return (
             <div className="chart">
                 Chart component
-                <Doughnut
+                <Bar
                     data={this.props.data}
+                    width={80}
+                    height={350}
                     options={{ maintainAspectRatio: false }}
                 />
                

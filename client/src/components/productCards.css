@@ -38,3 +38,25 @@
     margin-left: 15%;
     margin-top: 2%;
 }
+
+#wrapper
+{
+ text-align:center;
+ margin:0 auto;
+ padding:0px;
+ width:995px;
+}
+#output_image
+{
+ max-width:300px;
+}
+
+.cardBoxSize{
+    width: 190px;
+}
+
+.inputImgStyle{
+    font-size: 10px !important;
+    font-weight: 700;
+    width: 100%;
+}

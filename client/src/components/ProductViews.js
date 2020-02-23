@@ -32,7 +32,7 @@ class ProductViews extends Component {
                 data.push(Number(product.viewed));
                 return <ProductCards key={product._id} product={product} viewed={product} />
             })
-            datasets.push({label:"views",data,backgroundColor:['red','blue']});
+            datasets.push({label:"views",data,backgroundColor:'rgba(75,192,192,0.4)',lineTension: 1,});
             console.log("ddddddd",{labels,datasets});
             chartData = {labels,datasets};
             

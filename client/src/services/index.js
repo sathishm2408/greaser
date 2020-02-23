@@ -69,9 +69,16 @@ const addProduct = async (bodyData) => {
       description: bodyData.description,
       gender: bodyData.gender,
       category: bodyData.category,
+      sleeveType: bodyData.sleeveType,
+      neckType: bodyData.neckType,
       manufacturer: bodyData.manufacturer,
       price: bodyData.price,
-      quantity: bodyData.quantity
+      quantity: bodyData.quantity,
+      image1: bodyData.image1,
+      image2: bodyData.image2,
+      image3: bodyData.image3,
+      image4: bodyData.image4,
+      image5: bodyData.image5
     },
     headers: {
       'Content-Type': 'application/json',

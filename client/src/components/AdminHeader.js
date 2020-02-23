@@ -242,9 +242,9 @@ class AdminHeaderComponent extends Component {
                                 <a className="nav-link" href="/">Orders</a>
                             </li>
                             <li className="nav-item">
-                                <div class="ui small icon input">
+                                <div className="ui small icon input">
                                     <input type="text" placeholder="Search..." />
-                                    <i class="search icon"></i>
+                                    <i className="search icon"></i>
                                 </div>
                             </li>
                         </ul>
