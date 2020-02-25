@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter, Prompt } from 'react-router-dom';
 import { Button, Header, Modal, Icon, Input, Dropdown, Accordion, Form, Segment } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { addProduct } from '../actions/product';
@@ -7,9 +8,10 @@ import cam from '../assets/cam.jpg'
 
 class AddProduct extends Component {
     state = {
+        modified: false,
         gender: '',
         category: '',
-        sleeveType:'',
+        sleeveType: '',
         neckType: '',
         activeIndex: 0,
         pic1: '',
@@ -25,27 +27,31 @@ class AddProduct extends Component {
 
     componentDidUpdate() {
         console.log("immmmmm", this.state.pic1);
-
     }
 
     getGender = (event, { value }) => {
         console.log("innnn", value);
-        this.setState({ gender: value })
+        this.setState({ gender: value, modified: true })
     }
 
     getSleeveType = (event, { value }) => {
         console.log("innnn", value);
-        this.setState({ sleeveType: value })
+        //this.setState({modified: true})
+        this.setState({ sleeveType: value, modified: true }, function () {
+            console.log("innnn", this.state.modified, this.state.sleeveType);
+        });
+
+        console.log("innnn", this.state.modified, this.state.sleeveType);
     }
 
     getNeckType = (event, { value }) => {
         console.log("innnn", value);
-        this.setState({ neckType: value })
+        this.setState({ neckType: value, modified: true })
     }
 
     getCategory = (event, { value }) => {
         console.log("innnn", value);
-        this.setState({ category: value })
+        this.setState({ category: value, modified: true })
     }
 
     addedMessage = () => {
@@ -62,6 +68,7 @@ class AddProduct extends Component {
     }
 
     preview_image = (event, img) => {
+        this.setState({ modified: true })
         var reader = new FileReader();
         reader.onload = function () {
             var output = document.getElementById(img);
@@ -80,6 +87,7 @@ class AddProduct extends Component {
             this.setState({ pic5: event.target.files[0] })
     }
     submit = () => {
+        this.setState({ modified: false })
         const reqBody = {}
         reqBody.productName = document.getElementById("productName").value
         reqBody.description = document.getElementById("description").value
@@ -101,6 +109,8 @@ class AddProduct extends Component {
         this.props.addProduct(reqBody);
     }
     render() {
+        console.log("aaaa", this.state.modified);
+
         const { activeIndex } = this.state
         const genderOptions = [
             { key: 1, text: 'Male', value: "male" },
@@ -127,7 +137,6 @@ class AddProduct extends Component {
         ];
 
         return (
-
             <div>
                 {
                     (this.props.addedProducts) ? this.addedMessage() : null
@@ -140,7 +149,7 @@ class AddProduct extends Component {
                     >
                         <Icon name='dropdown' />
                         Product Image
-        </Accordion.Title>
+                </Accordion.Title>
                     <Accordion.Content active={activeIndex === 0}>
                         <div className="flexFooter">
 
@@ -261,7 +270,7 @@ class AddProduct extends Component {
                     >
                         <Icon name='dropdown' />
                         Product Info
-        </Accordion.Title>
+                    </Accordion.Title>
                     <Accordion.Content active={activeIndex === 1}>
                         <div className="AddProduct-field">
                             <label className="label-field">Product Name</label>
@@ -280,7 +289,7 @@ class AddProduct extends Component {
                     >
                         <Icon name='dropdown' />
                         Product Types
-        </Accordion.Title>
+                    </Accordion.Title>
                     <Accordion.Content active={activeIndex === 2}>
 
                         <div className="AddProduct-field">
@@ -317,7 +326,7 @@ class AddProduct extends Component {
                     >
                         <Icon name='dropdown' />
                         Inventory
-        </Accordion.Title>
+                    </Accordion.Title>
                     <Accordion.Content active={activeIndex === 3}>
 
                         <div className="AddProduct-field">
@@ -329,6 +338,7 @@ class AddProduct extends Component {
                         </div>
                     </Accordion.Content>
                 </Accordion>
+                <Prompt when={this.state.modified} message="Are you sure you want to leave this page?"></Prompt>
             </div>
 
         )

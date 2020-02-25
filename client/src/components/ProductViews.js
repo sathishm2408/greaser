@@ -30,7 +30,7 @@ class ProductViews extends Component {
             productData = allProducts.map((product) => {
                 labels.push(product.productName)
                 data.push(Number(product.viewed));
-                return <ProductCards key={product._id} product={product} viewed={product} />
+                //return <ProductCards key={product._id} product={product} viewed={product} />
             })
             datasets.push({label:"views",data,backgroundColor:'rgba(75,192,192,0.4)',lineTension: 1,});
             console.log("ddddddd",{labels,datasets});
@@ -47,7 +47,7 @@ class ProductViews extends Component {
                         <div className="col-lg-2 col-md-2 col-xs-0 filter"></div>
                         <div className="col-lg-10 col-md-10 col-xs-12">
                             <div className="row">
-                                {productData}
+                                {/* {productData} */}
                             </div>
                         </div>
                     </div>
