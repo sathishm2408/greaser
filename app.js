@@ -1,8 +1,11 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const multer = require('multer');
 //const path = require('path');
 const bodyParser = require('body-parser');
+
+
 const authRouter = require('./server/routes/index');
 const productRouter = require('./server/routes/products');
 
@@ -15,8 +18,16 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 
+
+
 app.use('/authService', authRouter);
 app.use('/products', productRouter);
+
+// app.use(multer({ dest: './client/public/uploads/',
+//     rename: function (fieldname, filename) {
+//     return filename;
+//     },
+//     }));
 
 // app.use(function(req, res, next) {
 //     next();

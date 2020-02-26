@@ -101,7 +101,7 @@ class AddProduct extends Component {
         reqBody.MRP = document.getElementById("mrp").value
         reqBody.manufactureCost = document.getElementById("manufactureCost").value
         reqBody.quantity = document.getElementById("quantity").value
-        reqBody.image1 = document.getElementById("pic1").value
+       // reqBody.image1 = this.state.pic1;
         reqBody.image2 = this.state.pic2;
         reqBody.image3 = this.state.pic3;
         reqBody.image4 = this.state.pic4;
@@ -169,7 +169,7 @@ class AddProduct extends Component {
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic1) ?
-                                                            <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic1")} />
+                                                            <input type="file" className="inputImgStyle" name="img1" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic1")} />
                                                             :
                                                             <button >Remove</button>
                                                     }

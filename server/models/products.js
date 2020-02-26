@@ -60,7 +60,7 @@ let ProductSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    image1:{},
+    image1:{type: Buffer},
     image2:{},
     image3:{},
     image4:{},
