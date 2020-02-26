@@ -97,7 +97,9 @@ class AddProduct extends Component {
         reqBody.sleeveType = this.state.sleeveType
         reqBody.neckType = this.state.neckType
         reqBody.manufacturer = document.getElementById("manufacturer").value
-        reqBody.price = document.getElementById("price").value
+        reqBody.salesPrice = document.getElementById("salesPrice").value
+        reqBody.MRP = document.getElementById("mrp").value
+        reqBody.manufactureCost = document.getElementById("manufactureCost").value
         reqBody.quantity = document.getElementById("quantity").value
         reqBody.image1 = document.getElementById("pic1").value
         reqBody.image2 = this.state.pic2;
@@ -121,7 +123,8 @@ class AddProduct extends Component {
             { key: 1, text: 'Tshirt', value: "Tshirt" },
             { key: 2, text: 'Shirt', value: "Shirt" },
             { key: 3, text: 'Denim', value: "Denim" },
-            { key: 4, text: 'Tracks', value: "Tracks" }
+            { key: 4, text: 'Joggers', value: "Joggers" },
+            { key: 5, text: 'Trousers', value: "Trousers" }
         ];
 
         const sleeveOptions = [
@@ -133,7 +136,8 @@ class AddProduct extends Component {
         const neckTypeOptions = [
             { key: 1, text: 'Round Neck', value: "Round Neck" },
             { key: 2, text: 'V Neck', value: "V Neck" },
-            { key: 3, text: 'Polo', value: "Polo" }
+            { key: 3, text: 'Polo', value: "Polo" },
+            { key: 4, text: 'Hooded', value: "Hooded" }
         ];
 
         return (
@@ -295,28 +299,18 @@ class AddProduct extends Component {
                         <div className="AddProduct-field">
                             <label className="label-field">Gender</label>
                             <Dropdown placeholder='gender' id="gender" selection={true} options={genderOptions} onChange={this.getGender} />
-                            {/* <Input type="text" id="gender" name="gender" placeholder="Enter gender" /> */}
-                        </div>
-                        <div className="AddProduct-field">
                             <label className="label-field">Category</label>
                             <Dropdown placeholder='category' id="category" selection={true} options={categoryOptions} onChange={this.getCategory} />
                         </div>
-                        <div className="AddProduct-field">
-                            <label className="label-field">Sleeve Type</label>
-                            <Dropdown placeholder='category' id="sleeveType" selection={true} options={sleeveOptions} onChange={this.getSleeveType} />
-                        </div>
-                        <div className="AddProduct-field">
-                            <label className="label-field">Neck Type</label>
-                            <Dropdown placeholder='category' id="neckType" selection={true} options={neckTypeOptions} onChange={this.getNeckType} />
-                        </div>
-                        <div className="AddProduct-field">
-                            <label className="label-field">Manufacturer</label>
-                            <Input type="text" id="manufacturer" name="manufacturer" placeholder="manufacturer" />
-                        </div>
-                        <div className="AddProduct-field">
-                            <label className="label-field">Price</label>
-                            <Input type="number" id="price" name="price" placeholder="Enter price" />
-                        </div>
+                        {
+                            (this.state.category === "Tshirt") ?
+                                <div className="AddProduct-field">
+                                    <label className="label-field">Sleeve Type</label>
+                                    <Dropdown placeholder='category' id="sleeveType" selection={true} options={sleeveOptions} onChange={this.getSleeveType} />
+                                    <label className="label-field">Neck Type</label>
+                                    <Dropdown placeholder='category' id="neckType" selection={true} options={neckTypeOptions} onChange={this.getNeckType} />
+                                </div>:(null)
+                        }
                     </Accordion.Content>
 
                     <Accordion.Title
@@ -325,9 +319,31 @@ class AddProduct extends Component {
                         onClick={this.handleClick}
                     >
                         <Icon name='dropdown' />
-                        Inventory
+                        Prices
                     </Accordion.Title>
                     <Accordion.Content active={activeIndex === 3}>
+                        <div className="AddProduct-field">
+                            <label className="label-field">SalesPrice</label>
+                            <Input type="number" id="salesPrice" name="salesPrice" placeholder="Enter price" />
+                            <label className="label-field">MRP</label>
+                            <Input type="number" id="mrp" name="mrp" placeholder="Enter price" />
+                        </div>
+                        <div className="AddProduct-field">
+                            <label className="label-field">Making Cost</label>
+                            <Input type="number" id="manufactureCost" name="manufactureCost" placeholder="Enter price" />
+                            <label className="label-field">Manufacturer</label>
+                            <Input type="text" id="manufacturer" name="manufacturer" placeholder="manufacturer" />
+                        </div>
+                    </Accordion.Content>
+                    <Accordion.Title
+                        active={activeIndex === 4}
+                        index={4}
+                        onClick={this.handleClick}
+                    >
+                        <Icon name='dropdown' />
+                        Inventory
+                    </Accordion.Title>
+                    <Accordion.Content active={activeIndex === 4}>
 
                         <div className="AddProduct-field">
                             <label className="label-field">quantity</label>

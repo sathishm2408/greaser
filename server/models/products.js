@@ -28,13 +28,11 @@ let ProductSchema = new mongoose.Schema({
     },
     sleeveType:{
         type: String,
-        required:true,
         trim: true,
         lowercase: true
     },
     neckType:{
         type: String,
-        required:true,
         trim: true,
         lowercase: true
     },
@@ -43,9 +41,18 @@ let ProductSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    price: {
+    salesPrice: {
         type: Number,
         required: true,
+        trim: true
+    },
+    MRP: {
+        type: Number,
+        required: true,
+        trim: true
+    },
+    manufactureCost: {
+        type: Number,
         trim: true
     },
     quantity: {

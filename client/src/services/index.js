@@ -64,22 +64,7 @@ const addProduct = async (bodyData) => {
   let res = await axios({
     method: 'post',
     url: 'http://localhost:3005/products/add',
-    data: {
-      productName: bodyData.productName,
-      description: bodyData.description,
-      gender: bodyData.gender,
-      category: bodyData.category,
-      sleeveType: bodyData.sleeveType,
-      neckType: bodyData.neckType,
-      manufacturer: bodyData.manufacturer,
-      price: bodyData.price,
-      quantity: bodyData.quantity,
-      image1: bodyData.image1,
-      image2: bodyData.image2,
-      image3: bodyData.image3,
-      image4: bodyData.image4,
-      image5: bodyData.image5
-    },
+    data: bodyData,
     headers: {
       'Content-Type': 'application/json',
       'x-access-token': sessionStorage.getItem('token')
