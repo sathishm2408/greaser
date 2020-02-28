@@ -10,7 +10,7 @@ export default class ProductCards extends Component {
                         <img className='card-img-top productimg' src={product_img} alt="products"></img>
                         <div className="card-body">
                             <h4 className='card-title'>{this.props.product.productName.toUpperCase()}</h4>
-                            <b className='card-text'>Rs.{this.props.product.price}</b>
+                            <b className='card-text'>Rs.{this.props.product.salesPrice}</b>
                             {
                                 (this.props.viewed)?<p className='card-text'>Views {this.props.product.viewed}</p>:null
                             }

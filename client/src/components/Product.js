@@ -13,7 +13,7 @@ class Product extends Component {
     }
 
     render() {
-        console.log("333333333 in cards", this.props)
+        console.log("333333333 in cards", this.props.productDetails)
         return (
             <div className="product-img">
                 <div >

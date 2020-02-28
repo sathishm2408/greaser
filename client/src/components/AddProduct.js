@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter, Prompt } from 'react-router-dom';
-import { Button, Header, Modal, Icon, Input, Dropdown, Accordion, Form, Segment } from 'semantic-ui-react';
+import { Button, Header, Modal, Icon, Input, Dropdown, Accordion } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { addProduct } from '../actions/product';
 import './productCards.css';
@@ -26,7 +26,9 @@ class AddProduct extends Component {
     }
 
     componentDidUpdate() {
-        console.log("immmmmm", this.state.pic1);
+        const fileData = new window.FormData();
+        fileData.append('file1', this.state.pic1)
+        console.log("immmmmm", fileData);
     }
 
     getGender = (event, { value }) => {
@@ -88,10 +90,10 @@ class AddProduct extends Component {
     }
     submit = () => {
         this.setState({ modified: false })
+
         const reqBody = {}
         reqBody.productName = document.getElementById("productName").value
         reqBody.description = document.getElementById("description").value
-        // reqBody.gender = document.getElementById("gender").value
         reqBody.gender = this.state.gender
         reqBody.category = this.state.category
         reqBody.sleeveType = this.state.sleeveType
@@ -101,14 +103,18 @@ class AddProduct extends Component {
         reqBody.MRP = document.getElementById("mrp").value
         reqBody.manufactureCost = document.getElementById("manufactureCost").value
         reqBody.quantity = document.getElementById("quantity").value
-       // reqBody.image1 = this.state.pic1;
-        reqBody.image2 = this.state.pic2;
-        reqBody.image3 = this.state.pic3;
-        reqBody.image4 = this.state.pic4;
-        reqBody.image5 = this.state.pic5;
+        // reqBody.image1 = fileData;
+        // reqBody.image2 = this.state.pic2;
+        // reqBody.image3 = this.state.pic3;
+        // reqBody.image4 = this.state.pic4;
+        // reqBody.image5 = this.state.pic5;
         console.log("reqbody", reqBody);
 
-        this.props.addProduct(reqBody);
+        const fileData = new window.FormData();
+        fileData.append('file1', this.state.pic1);
+        fileData.append('data', JSON.stringify(reqBody));
+
+        this.props.addProduct(fileData);
     }
     render() {
         console.log("aaaa", this.state.modified);
@@ -157,7 +163,7 @@ class AddProduct extends Component {
                     <Accordion.Content active={activeIndex === 0}>
                         <div className="flexFooter">
 
-                            <div class="d-flex flex-row">
+                            <div className="d-flex flex-row">
                                 <div className="p-2">
                                     <div className="d-flex justify-content-between">
 
@@ -181,7 +187,7 @@ class AddProduct extends Component {
                                     </div>
                                 </div>
 
-                                <div class="p-2">
+                                <div className="p-2">
                                     <div className="d-flex justify-content-between">
 
                                         <div className="card cardBoxSize">
@@ -202,7 +208,7 @@ class AddProduct extends Component {
 
                                     </div>
                                 </div>
-                                <div class="p-2">
+                                <div className="p-2">
                                     <div className="d-flex justify-content-between">
 
                                         <div className="card cardBoxSize">
@@ -223,7 +229,7 @@ class AddProduct extends Component {
 
                                     </div>
                                 </div>
-                                <div class="p-2">
+                                <div className="p-2">
                                     <div className="d-flex justify-content-between">
 
                                         <div className="card cardBoxSize">
@@ -245,7 +251,7 @@ class AddProduct extends Component {
                                     </div>
                                 </div>
 
-                                <div class="p-2">
+                                <div className="p-2">
                                     <div className="d-flex justify-content-between">
 
                                         <div className="card cardBoxSize" >
@@ -355,6 +361,7 @@ class AddProduct extends Component {
                     </Accordion.Content>
                 </Accordion>
                 <Prompt when={this.state.modified} message="Are you sure you want to leave this page?"></Prompt>
+
             </div>
 
         )

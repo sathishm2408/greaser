@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const multer = require('multer');
+var upload = multer({ dest: 'uploads/' })
 require('../db/mongoose');
 const auth = require('../middleware/auth')
 const Product = require('../models/products');
@@ -32,14 +34,17 @@ router.get('/views',auth,async (req, res) => {
     }
 });
 
-router.post('/add', auth,(req, res) => {
-    console.log("addddd",req.body.image1);
-    
+router.post('/add', auth,upload.single('file1'),(req, res) => {
+    console.log("addddd file", req.file);
+    console.log("addddd body", JSON.parse(req.body.data));
+    var data = JSON.parse(req.body.data);
+    // console.log("addddd file",req.body.image1);
     let product = new Product({
-        ...req.body,
+        ...data,
         creator : req.user._id
     });
 
+    
     product.save().then(() => {
         console.log("add product",product);
         
