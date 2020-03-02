@@ -21,6 +21,7 @@ class AddProduct extends Component {
         pic5: ''
     }
     UNSAFE_componentWillMount() {
+        console.log("wwwwww",Date.now())
         console.log("Aaaaaaaaaaaaaaaa", this.props);
         //this.props.getAllProducts();
     }
@@ -112,6 +113,10 @@ class AddProduct extends Component {
 
         const fileData = new window.FormData();
         fileData.append('file1', this.state.pic1);
+        fileData.append('file2', this.state.pic2);
+        fileData.append('file3', this.state.pic3);
+        fileData.append('file4', this.state.pic4);
+        fileData.append('file5', this.state.pic5);
         fileData.append('data', JSON.stringify(reqBody));
 
         this.props.addProduct(fileData);

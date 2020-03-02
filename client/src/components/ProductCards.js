@@ -19,7 +19,6 @@ export default class ProductCards extends Component {
                                 <a href={`/admin/updateProduct/${this.props.product._id}`} className="btn btn-primary card-button">Update Product</a>
                                 <a href={`/admin/product/${this.props.product._id}`} className="btn btn-danger card-button">Delete Product</a>
                             </p>
-
                         </div>
                     </div>
                     </div>

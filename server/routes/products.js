@@ -1,10 +1,26 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-var upload = multer({ dest: 'uploads/' })
+// var upload = multer({ dest: 'uploads/temp/' })
+var storage = multer.diskStorage({ 
+    destination: function (req, file, cb) {
+        cb(null, '../uploads/temp/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+});
+var upload = multer({storage: storage})
 require('../db/mongoose');
 const auth = require('../middleware/auth')
 const Product = require('../models/products');
+
+var picUpload = upload.fields([
+    { name: 'file1', maxCount: 1 },
+    { name: 'file2', maxCount: 1 },
+    { name: 'file3', maxCount: 1 },
+    { name: 'file4', maxCount: 1 },
+    { name: 'file5', maxCount: 1 }])
 
 router.get('/all',async (req, res) => {
     //console.log(req.body);
@@ -34,13 +50,14 @@ router.get('/views',auth,async (req, res) => {
     }
 });
 
-router.post('/add', auth,upload.single('file1'),(req, res) => {
+router.post('/add', auth,picUpload,(req, res) => {
     console.log("addddd file", req.file);
     console.log("addddd body", JSON.parse(req.body.data));
     var data = JSON.parse(req.body.data);
-    // console.log("addddd file",req.body.image1);
+    var id = Date.now();
     let product = new Product({
         ...data,
+        productId : id,
         creator : req.user._id
     });
 

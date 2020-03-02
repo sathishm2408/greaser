@@ -14,6 +14,10 @@
     float:right;
 }
 
+.card-button{
+    margin-right: 5.4%;
+}
+
 .padding-rt{
     margin-right: 50px
 }
@@ -60,8 +64,4 @@
     font-size: 10px !important;
     font-weight: 700;
     width: 100%;
-}
-
-.card-button{
-    margin-right: 5.4%;
 }

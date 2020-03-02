@@ -4,6 +4,10 @@ const mongoose = require('mongoose');
 // const jwt = require('jsonwebtoken');
 
 let ProductSchema = new mongoose.Schema({
+    productId: {
+        type: Number,
+        required: true
+    },
     productName: {
         type: String,
         required: true,
