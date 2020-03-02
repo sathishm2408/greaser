@@ -29,7 +29,7 @@ ReactDOM.render(
                     <Route exact path='/admin' render={() => <AdminHeader><AdminHome /></AdminHeader>}></Route>
                     <Route exact path='/admin/product/:id' render={() => <AdminHeader><Product /></AdminHeader>}></Route>
                     <Route exact path='/admin/AddProduct' render={() => <AdminHeader><AddProduct /></AdminHeader>}></Route>
-                    <Route exact path='/admin/updateProduct' render={() => <AdminHeader><UpdateProduct /></AdminHeader>}></Route>
+                    <Route exact path='/admin/updateProduct/:id' render={() => <AdminHeader><UpdateProduct /></AdminHeader>}></Route>
                     <Route exact path='/admin/views' render={() => <AdminHeader><ProductViews /></AdminHeader>}></Route>
 
                 </Switch>

@@ -15,7 +15,9 @@ export default class ProductCards extends Component {
                                 (this.props.viewed)?<p className='card-text'>Views {this.props.product.viewed}</p>:null
                             }
                             <p>
-                                <a href={`/admin/product/${this.props.product._id}`} className="btn btn-primary">View Product</a>
+                                <a href={`/admin/product/${this.props.product._id}`} className="btn btn-success card-button">View Product</a>
+                                <a href={`/admin/updateProduct/${this.props.product._id}`} className="btn btn-primary card-button">Update Product</a>
+                                <a href={`/admin/product/${this.props.product._id}`} className="btn btn-danger card-button">Delete Product</a>
                             </p>
 
                         </div>

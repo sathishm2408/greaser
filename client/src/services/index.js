@@ -109,6 +109,23 @@ const getProductDetails = async (id) => {
   return res;
 }
 
+const updateProduct = async (id,bodyData) => {
+  let res = await axios({
+    method: 'post',
+    url: `http://localhost:3005/products/update/${id}`,
+    data: bodyData,
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': sessionStorage.getItem('token')
+  }
+  })
+    .then((result) => result.data)
+    .catch(e => {
+      throw new Error(e.response.data.message);
+    });
+  return res;
+}
+
 export { getAllProducts, loginCall, logout, signupService, addProduct,getViews,getProductDetails };
 
 // async function register(user) {
