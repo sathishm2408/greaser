@@ -1,10 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
+const mv = require('mv');
 const multer = require('multer');
-// var upload = multer({ dest: 'uploads/temp/' })
+// var upload = multer({ dest: 'server/uploads/temp/' });
 var storage = multer.diskStorage({ 
     destination: function (req, file, cb) {
-        cb(null, '../uploads/temp/')
+        cb(null, 'server/uploads/temp/')
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname)
@@ -55,9 +57,25 @@ router.post('/add', auth,picUpload,(req, res) => {
     console.log("addddd body", JSON.parse(req.body.data));
     var data = JSON.parse(req.body.data);
     var id = Date.now();
+    var dir =`server/uploads/${id}`;
+    // if (!fs.existsSync(dir)){
+    //     fs.mkdirSync(dir);
+    // }
+        mv('server/uploads/temp/', dir, {mkdirp: true}, function(err) {
+            if(err)
+            console.log("error in moving files",err);
+            fs.mkdirSync('server/uploads/temp');
+            console.log("moved successfully");
+            
+            
+            // done. it first created all the necessary directories, and then
+            // tried fs.rename, then falls back to using ncp to copy the dir
+            // to dest and then rimraf to remove the source dir
+          });
+    // }
     let product = new Product({
         ...data,
-        productId : id,
+        _id : id,
         creator : req.user._id
     });
 

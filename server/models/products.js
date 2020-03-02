@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 // const jwt = require('jsonwebtoken');
 
 let ProductSchema = new mongoose.Schema({
-    productId: {
+    _id: {
         type: Number,
         required: true
     },
