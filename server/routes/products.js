@@ -4,7 +4,7 @@ const fs = require('fs');
 const mv = require('mv');
 const multer = require('multer');
 // var upload = multer({ dest: 'server/uploads/temp/' });
-var storage = multer.diskStorage({ 
+var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'server/uploads/temp/')
     },
@@ -12,7 +12,7 @@ var storage = multer.diskStorage({
         cb(null, file.originalname)
     }
 });
-var upload = multer({storage: storage})
+var upload = multer({ storage: storage })
 require('../db/mongoose');
 const auth = require('../middleware/auth')
 const Product = require('../models/products');
@@ -24,7 +24,7 @@ var picUpload = upload.fields([
     { name: 'file4', maxCount: 1 },
     { name: 'file5', maxCount: 1 }])
 
-router.get('/all',async (req, res) => {
+router.get('/all', async (req, res) => {
     //console.log(req.body);
     try {
         const product = await Product.find();
@@ -38,10 +38,10 @@ router.get('/all',async (req, res) => {
     }
 });
 
-router.get('/views',auth,async (req, res) => {
+router.get('/views', auth, async (req, res) => {
     //console.log(req.body);
     try {
-        const product = await Product.find().sort({viewed:-1});
+        const product = await Product.find().sort({ viewed: -1 });
         //console.log(user);
         if (!product)
             res.status(400).send("Product not found")
@@ -52,62 +52,70 @@ router.get('/views',auth,async (req, res) => {
     }
 });
 
-router.post('/add', auth,picUpload,(req, res) => {
-    console.log("addddd file", req.file);
-    console.log("addddd body", JSON.parse(req.body.data));
+router.post('/add', auth, picUpload, (req, res) => {
+    // console.log("addddd file", req.file);
+    // console.log("addddd body", JSON.parse(req.body.data));
     var data = JSON.parse(req.body.data);
     var id = Date.now();
-    var dir =`server/uploads/${id}`;
-    // if (!fs.existsSync(dir)){
-    //     fs.mkdirSync(dir);
-    // }
-        mv('server/uploads/temp/', dir, {mkdirp: true}, function(err) {
-            if(err)
-            console.log("error in moving files",err);
-            fs.mkdirSync('server/uploads/temp');
-            console.log("moved successfully");
-            
-            
-            // done. it first created all the necessary directories, and then
-            // tried fs.rename, then falls back to using ncp to copy the dir
-            // to dest and then rimraf to remove the source dir
-          });
-    // }
-    let product = new Product({
-        ...data,
-        _id : id,
-        creator : req.user._id
-    });
-
+    var dir = `server/uploads/${id}`;
+    var image1, image2, image3, image4, image5;
+    var i = 0;
     
-    product.save().then(() => {
-        console.log("add product",product);
-        
-        res.send({product});
-    }).catch((err) => {
-        if(err)
-        res.status(400).send({message:err.message});
-        console.log(err);
+    mv('server/uploads/temp/', dir, { mkdirp: true }, function (err) {
+        if (err)
+            console.log("error in moving files", err);
+        else if (!fs.existsSync('server/uploads/temp'))
+            fs.mkdirSync('server/uploads/temp');
+        console.log("moved successfully")
+        fs.readdirSync(dir).forEach(file => {
+            if (i == 0)
+                image1 = dir + '/' + file;
+            if (i == 1)
+                image2 = dir + '/' + file;
+            if (i == 2)
+                image3 = dir + '/' + file;
+            if (i == 3)
+                image4 = dir + '/' + file;
+            if (i == 4)
+                image5 = dir + '/' + file;
+            i++;
+            //console.log(file);
+        });
+        //console.log("iiiiii",image1,image2,image3);
+        let product = new Product({
+            _id: id,
+            ...data,
+            image1, image2, image3, image4, image5,
+            creator: req.user._id
+        });
+        product.save().then(() => {
+            // console.log("add product", product);
+            res.send({ product });
+        }).catch((err) => {
+            if (err)
+                res.status(400).send({ message: err.message });
+            // console.log(err);
+        });
     });
 });
 
-router.get('/myProducts', auth,async (req, res) => {
+router.get('/myProducts', auth, async (req, res) => {
     try {
-        await req.user.populate('myProducts').execPopulate(); 
+        await req.user.populate('myProducts').execPopulate();
         res.send(req.user.myProducts);
     } catch (e) {
         res.status(400).send(e);
     }
 });
 
-router.put('/update/:id',auth, async (req, res) => {
+router.put('/update/:id', auth, async (req, res) => {
     //console.log(req.body);
     const updates = Object.keys(req.body);
     let updatedBy = req.user._id;
     let updatedTime = new Date();
-    const updater = {updatedBy,updatedTime}
+    const updater = { updatedBy, updatedTime }
     try {
-        const product = await Product.findOne({_id:req.params.id});
+        const product = await Product.findOne({ _id: req.params.id });
         //console.log(user);
         if (!product)
             res.status(400).send("Your products are not found")
@@ -123,7 +131,7 @@ router.put('/update/:id',auth, async (req, res) => {
     }
 });
 
-router.get('/:id', auth,async (req, res) => {
+router.get('/:id', auth, async (req, res) => {
     //console.log(req.body);
     try {
         const product = await Product.findById(req.params.id);
@@ -133,7 +141,7 @@ router.get('/:id', auth,async (req, res) => {
 
         await product.viewed++;
         await product.populate('creator').execPopulate();
-        
+
         product.save()
         res.send(product);
     } catch (e) {
@@ -142,11 +150,11 @@ router.get('/:id', auth,async (req, res) => {
 });
 
 
-router.delete('/:id', auth,async (req, res) => {
+router.delete('/:id', auth, async (req, res) => {
     //console.log(req.body);
     let creator = req.user._id;
     try {
-        const product = await Product.findOneAndDelete({_id:req.params.id,creator:req.user._id});
+        const product = await Product.findOneAndDelete({ _id: req.params.id, creator: req.user._id });
         //console.log(user);
 
         if (!product)
