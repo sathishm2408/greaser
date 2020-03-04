@@ -6,7 +6,7 @@ const multer = require('multer');
 // var upload = multer({ dest: 'server/uploads/temp/' });
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'server/uploads/temp/')
+        cb(null, 'public/uploads/temp/')
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname)
@@ -57,27 +57,28 @@ router.post('/add', auth, picUpload, (req, res) => {
     // console.log("addddd body", JSON.parse(req.body.data));
     var data = JSON.parse(req.body.data);
     var id = Date.now();
-    var dir = `server/uploads/${id}`;
+    var dir = `public/uploads/${id}`;
+    var dir2 = `uploads/${id}`;
     var image1, image2, image3, image4, image5;
     var i = 0;
     
-    mv('server/uploads/temp/', dir, { mkdirp: true }, function (err) {
+    mv('public/uploads/temp/', dir, { mkdirp: true }, function (err) {
         if (err)
             console.log("error in moving files", err);
-        else if (!fs.existsSync('server/uploads/temp'))
-            fs.mkdirSync('server/uploads/temp');
+        else if (!fs.existsSync('public/uploads/temp'))
+            fs.mkdirSync('public/uploads/temp');
         console.log("moved successfully")
         fs.readdirSync(dir).forEach(file => {
             if (i == 0)
-                image1 = dir + '/' + file;
+                image1 = dir2 + '/' + file;
             if (i == 1)
-                image2 = dir + '/' + file;
+                image2 = dir2 + '/' + file;
             if (i == 2)
-                image3 = dir + '/' + file;
+                image3 = dir2 + '/' + file;
             if (i == 3)
-                image4 = dir + '/' + file;
+                image4 = dir2 + '/' + file;
             if (i == 4)
-                image5 = dir + '/' + file;
+                image5 = dir2 + '/' + file;
             i++;
             //console.log(file);
         });
