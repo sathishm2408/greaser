@@ -111,7 +111,7 @@ const getProductDetails = async (id) => {
 
 const updateProduct = async (id,bodyData) => {
   let res = await axios({
-    method: 'post',
+    method: 'put',
     url: `http://localhost:3005/products/update/${id}`,
     data: bodyData,
     headers: {
@@ -126,7 +126,24 @@ const updateProduct = async (id,bodyData) => {
   return res;
 }
 
-export { getAllProducts, loginCall, logout, signupService, addProduct,getViews,getProductDetails };
+const deleteProduct = async (id) => {
+  let res = await axios({
+    method: 'delete',
+    url: `http://localhost:3005/products/${id}`,
+    headers: {
+      'Content-Type': 'application/json',
+      'x-access-token': sessionStorage.getItem('token')
+  }
+  })
+    .then((result) => result.data)
+    .catch(e => {
+      throw new Error(e.response.data.message);
+    });
+  return res;
+}
+
+export { getAllProducts, loginCall, logout, signupService, addProduct,getViews,getProductDetails,updateProduct,
+        deleteProduct };
 
 // async function register(user) {
 //     const res= await axios.post(config.registerUrl, user)

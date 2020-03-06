@@ -1,7 +1,7 @@
 {
-  "name": "authservice",
+  "name": "greaser",
   "version": "1.0.0",
-  "description": "Authentication server for optima tool",
+  "description": "server for Greaser",
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",

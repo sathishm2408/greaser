@@ -2,7 +2,8 @@ import * as services from '../services/index';
 // import { history } from "../components/helpers/history"
 
 import {ALLPRODUCTS_SUCCESS, ALLPRODUCTS_FAILED, ADDPRODUCT_SUCCESS, ADDPRODUCT_FAILED,
-   GETVIEWS_SUCCESS, GETVIEWS_FAILED, GETPRODUCTDETAILS_SUCCESS, GETPRODUCTDETAILS_FAILED} from '../constants/constants.js'
+   GETVIEWS_SUCCESS, GETVIEWS_FAILED, GETPRODUCTDETAILS_SUCCESS, GETPRODUCTDETAILS_FAILED,
+   UPDATEPRODUCT_SUCCESS, UPDATEPRODUCT_FAILED, DELETEPRODUCT_SUCCESS, DELETEPRODUCT_FAILED } from '../constants/constants.js'
 
 
 export function getAllProducts() {
@@ -68,6 +69,37 @@ export function getProductDetails(id) {
          })
    }
 }
+
+export function updateProduct(id,reqBody) {
+   return dispatch => {
+
+      services.updateProduct(id,reqBody)
+         .then(productData => {
+            dispatch(successUpdateProduct(productData), console.log("called in action",productData))
+         }
+)
+         .catch(e => {
+            dispatch(failUpdateProduct(e.message))
+            console.log(e.message)
+         })
+   }
+}
+
+export function deleteProduct(id) {
+   return dispatch => {
+
+      services.deleteProduct(id)
+         .then(productData => {
+            dispatch(successDeleteProduct(productData), console.log("called in action",productData))
+         }
+)
+         .catch(e => {
+            dispatch(failDeleteProduct(e.message))
+            console.log(e.message)
+         })
+   }
+}
+
 function success(productData) { return { type: ALLPRODUCTS_SUCCESS, productData } }
 function fail(message) { return { type: ALLPRODUCTS_FAILED, message } }
 
@@ -79,3 +111,9 @@ function failViews(message) { return { type: GETVIEWS_FAILED, message } }
 
 function successProductDetails(productData) { return { type: GETPRODUCTDETAILS_SUCCESS, productData } }
 function failProductDetails(message) { return { type: GETPRODUCTDETAILS_FAILED, message } }
+
+function successUpdateProduct(productData) { return { type: UPDATEPRODUCT_SUCCESS, productData } }
+function failUpdateProduct(message) { return { type: UPDATEPRODUCT_FAILED, message } }
+
+function successDeleteProduct(productData) { return { type: DELETEPRODUCT_SUCCESS, productData } }
+function failDeleteProduct(message) { return { type: DELETEPRODUCT_FAILED, message } }
