@@ -112,7 +112,7 @@ function failViews(message) { return { type: GETVIEWS_FAILED, message } }
 function successProductDetails(productData) { return { type: GETPRODUCTDETAILS_SUCCESS, productData } }
 function failProductDetails(message) { return { type: GETPRODUCTDETAILS_FAILED, message } }
 
-function successUpdateProduct(productData) { return { type: UPDATEPRODUCT_SUCCESS, productData } }
+function successUpdateProduct(productData) { return { type: UPDATEPRODUCT_SUCCESS, updatedData: productData } }
 function failUpdateProduct(message) { return { type: UPDATEPRODUCT_FAILED, message } }
 
 function successDeleteProduct(productData) { return { type: DELETEPRODUCT_SUCCESS, productData } }
