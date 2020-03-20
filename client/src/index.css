@@ -91,3 +91,9 @@ input{
 .edited{
   line-height: 50px;
 }
+
+.search{
+  height:40px;
+  margin-left: 30px;
+  margin-top: 10px
+}

@@ -13,9 +13,9 @@ import rootReducer from './reducers/main';
 import * as serviceWorker from './serviceWorker';
 import './index.css'
 
-const Product= lazy(()=> import('./components/Product'));
-const ProductViews =lazy(()=> import('./components/ProductViews'));
-const UpdateProduct= lazy(()=> import('./components/UpdateProduct'));
+const Product = lazy(() => import('./components/Product'));
+const ProductViews = lazy(() => import('./components/ProductViews'));
+const UpdateProduct = lazy(() => import('./components/UpdateProduct'));
 const AddProduct = lazy(() => import('./components/AddProduct'));
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -26,7 +26,7 @@ ReactDOM.render(
         <Router>
             <Suspense fallback={<h1>Loading...</h1>}>
                 <Switch>
-                    <Route exact path='/admin' render={() => <AdminHeader><AdminHome /></AdminHeader>}></Route>
+                    <Route exact path='/admin' render={(props) => <AdminHeader><AdminHome /></AdminHeader>}></Route>
                     <Route exact path='/admin/product/:id' render={() => <AdminHeader><Product /></AdminHeader>}></Route>
                     <Route exact path='/admin/AddProduct' render={() => <AdminHeader><AddProduct /></AdminHeader>}></Route>
                     <Route exact path='/admin/updateProduct/:id' render={() => <AdminHeader><UpdateProduct /></AdminHeader>}></Route>

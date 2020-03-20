@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Figure, Card, Button } from 'react-bootstrap';
-import {getProductDetails} from '../actions/product'
+import { getProductDetails } from '../actions/product'
 import './productCards.css';
+import AliceCarousel from 'react-alice-carousel'
+import 'react-alice-carousel/lib/alice-carousel.css'
 
 class Product extends Component {
 
@@ -11,39 +13,64 @@ class Product extends Component {
         console.log("Aaaaaaaaaaaaaaaa", this.props);
         this.props.getProductDetails(this.props.match.params.id);
     }
+    handleOnDragStart = (e) => e.preventDefault()
 
     render() {
+        let baseUrl = 'http://localhost:3005/'
         console.log("333333333 in cards", this.props.productDetails)
+        const product = this.props.productDetails
         return (
             <div className="product-img">
-                <div >
-                    <Figure className='padding-rt1'>
-                        <Figure.Image
-                            width={350}
-                            height={300}
-                            alt="171x180"
-                            src="https://www.bing.com/th?id=OIP.S8CwhNPJxY-3JbRolUEsHwHaFj&w=262&h=189&c=7&o=5&dpr=2&pid=1.7"
-                            thumbnail={true}
-                            roundedCircle={true}
-                        />
-                        <Figure.Caption>
-                            Nulla vitae elit libero, a pharetra augue mollis interdum.
-                     </Figure.Caption>
-                    </Figure>
+                <div className='viewProduct'>
+                    {product && <AliceCarousel mouseTrackingEnabled autoPlay={true} autoPlayInterval={3000}>
+                        <img src={baseUrl + `${product.image1}`} onDragStart={this.handleOnDragStart} className="yours-custom-class" alt='uygyugygy' />
+                        <img src={baseUrl + `${product.image2}`} onDragStart={this.handleOnDragStart} className="yours-custom-class" alt='uygyugygy' />
+                        <img src={baseUrl + `${product.image3}`} onDragStart={this.handleOnDragStart} className="yours-custom-class" alt='uygyugygy' />
+                        <img src={baseUrl + `${product.image4}`} onDragStart={this.handleOnDragStart} className="yours-custom-class" alt='uygyugygy' />
+                        <img src={baseUrl + `${product.image5}`} onDragStart={this.handleOnDragStart} className="yours-custom-class" alt='uygyugygy' />
+                    </AliceCarousel>}
+
 
                 </div>
 
                 <div className='padding-rt'>
-                    <Card>
-                        <Card.Header as="h5">Oneplus 7T</Card.Header>
-                        <Card.Body>
-                            <Card.Title>Description</Card.Title>
-                            <Card.Text>
-                                With supporting text below as a natural lead-in to additional content.
-                             </Card.Text>
-                            <Button variant="primary" className='btn-right'>Go somewhere</Button>
-                        </Card.Body>
-                    </Card>
+                    {product &&
+                        <div>
+                            < Card >
+                                <Card.Header as="h5">{product.productName}</Card.Header>
+                                <Card.Body>
+                                    <p>
+                                        <strong>Category:</strong>{product.category}
+                                    </p>
+                                    <p>
+                                        <strong>
+                                            MRP:
+                                        </strong>
+                                        <strike>₹{product.MRP}</strike>
+                                    </p>
+                                    <p>
+                                        <strong>
+                                            OfferPrize:
+                                        </strong>
+                                        ₹{product.salesPrice}
+                                    </p>
+                                    <p>
+                                        <strong>
+                                            Manufacturer:
+                                        </strong>
+                                        {product.manufacturer}
+                                    </p>
+                                    <Card.Title>Description:</Card.Title>
+                                    <Card.Text>
+                                        {product.description}
+                                    </Card.Text>
+
+
+                                    <a href='/admin'><Button variant="primary" className='btn-right'>Back</Button></a>
+                                </Card.Body>
+                            </Card>
+                        </div>
+                    }
                 </div>
             </div>
         )

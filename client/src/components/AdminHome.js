@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProductCards from './ProductCards';
 import { connect } from 'react-redux';
-import { getAllProducts } from '../actions/product';
+import { getAllProducts, getFilteredProduct } from '../actions/product';
 import './productCards.css';
 
 class AdminHome extends Component {
@@ -12,20 +12,26 @@ class AdminHome extends Component {
         }
     }
 
-    UNSAFE_componentWillMount() {
-        //console.log("11111111",this.props);
-        this.props.getAllProducts();
-    }
+
     render() {
+        console.log(this.props.filteredProduct, "in product page Its coming!!!!!")
         let data = [];
-        let allProducts = this.props.allProducts;
+        let allProducts = this.props.filteredProduct && this.props.filteredProduct != null ? this.props.filteredProduct : this.props.allProducts;
         //console.log("44444444",allProducts);
+        // if (this.props.product) {
+        //     data = this.props.product.map((product) => {
+        //         return <ProductCards key={product._id} product={product} />
+
+        //     })
+
+        // }
         if (allProducts) {
             data = allProducts.map((product) => {
                 return <ProductCards key={product._id} product={product} />
 
             })
         }
+
 
 
         return (
@@ -49,7 +55,8 @@ class AdminHome extends Component {
 
 const mapStateToProps = (state) => ({
 
-    allProducts: state.products.productData
+    allProducts: state.products.productData,
+    filteredProduct: state.products.productData
 })
 
-export default connect(mapStateToProps, { getAllProducts })(AdminHome)
+export default connect(mapStateToProps, { getFilteredProduct })(AdminHome)

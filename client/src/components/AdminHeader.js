@@ -3,9 +3,12 @@ import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Form } from 'react-bootstrap';
+import AdminHome from './AdminHome'
 //import history from 'history';
 import { Button, Header, Modal, Icon, Input } from 'semantic-ui-react';
 import { login, logout, signup } from '../actions/users';
+import { getFilteredProduct, getAllProducts } from '../actions/product'
 import '../index.css'
 
 class AdminHeaderComponent extends Component {
@@ -20,18 +23,21 @@ class AdminHeaderComponent extends Component {
         this.state = {
             open: false,
             signup: false,
-            validEmail: true
+            validEmail: true,
+            product: [],
+            products: []
+
         }
     }
 
-    componentDidMount() {
-        console.log("!!!!!!!!!!!! in headerrrrrr component", this.props);
-        // console.log("@@@@@@@@@@ didupdate component", this.props.user.message);   
-    }
+    // componentDidMount() {
+    //     this.props.getAllProducts();
+    // }
 
-    componentDidUpdate() {
-        console.log("!!!!!!!!!!!! didUpdate in headerrrrrr component", this.props);
-    }
+    // componentWillReceiveProps(newProps) {
+    //     this.setState({ products: newProps.products });
+    // }
+
 
     show = (tab) => {
         this.setState({ open: true })
@@ -104,6 +110,14 @@ class AdminHeaderComponent extends Component {
             </div>
         )
     }
+    // componentDidMount() {
+    //     this.props.getAllProducts();
+    // }
+    // componentWillReceiveProps(newProps) {
+    //     this.setState({ products: newProps.products }, () => {
+    //         console.log(this.state.products, "products data")
+    //     });
+    // }
 
     emailError = () => {
         return (
@@ -113,11 +127,43 @@ class AdminHeaderComponent extends Component {
         )
     }
 
+    componentDidMount() {
+        this.props.getAllProducts();
+    }
+    componentWillReceiveProps(newProps) {
+        console.log("recieve", newProps.products)
+        this.setState({ product: newProps.products });
+    }
+
     logout() {
         //console.log("ooooooooooo",this.props);
         this.props.logout();
     }
+    onSearch = (e) => {
+        console.log(this.props.products.productData, "whole data")
+        console.log(e.target.value, "value e")
+        let filteredProducts = [...this.props.products.productData]
 
+        if (e.target.value != '') {
+            filteredProducts = this.props.products.productData.filter(product => {
+                return (product.productName.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0);
+            });
+            console.log(filteredProducts, "filtered product before")
+            this.setState({
+                products: filteredProducts
+            }, () => {
+                console.log("filtering the product", this.state.products)
+                this.props.getFilteredProduct(this.state.products)
+            })
+        }
+        else {
+            this.props.getAllProducts();
+        }
+
+
+
+
+    }
     modalType(value) {
         if (value === "signup") {
             this.setState({ signup: true })
@@ -204,7 +250,7 @@ class AdminHeaderComponent extends Component {
     }
 
     render() {
-
+        console.log(this.props.match.url, "new head id")
         const { open, signup } = this.state;
 
         let modal = (
@@ -241,11 +287,8 @@ class AdminHeaderComponent extends Component {
                             <li className="nav-item">
                                 <a className="nav-link" href="/">Orders</a>
                             </li>
-                            <li className="nav-item">
-                                <div className="ui small icon input">
-                                    <input type="text" placeholder="Search..." />
-                                    <i className="search icon"></i>
-                                </div>
+                            <li className="nav-item ">
+                                <Form.Control type="text" placeholder="Search Product" onChange={this.onSearch} className='search' />
                             </li>
                         </ul>
                         {
@@ -255,6 +298,8 @@ class AdminHeaderComponent extends Component {
                 </nav>
                 {modal}
                 {this.props.children}
+
+
             </div >
         )
     }
@@ -263,9 +308,12 @@ class AdminHeaderComponent extends Component {
 const mapStateToProps = (state) => {
     // user : state.users
     console.log("mapStateToProps", state);
-    return { user: state.users }
+    return {
+        user: state.users,
+        products: state.products
+    }
 
 }
 
 
-export default connect(mapStateToProps, { login, logout, signup })(withRouter(AdminHeaderComponent))
+export default connect(mapStateToProps, { login, logout, signup, getFilteredProduct, getAllProducts })(withRouter(AdminHeaderComponent))

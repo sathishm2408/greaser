@@ -1,6 +1,6 @@
 import {
     ALLPRODUCTS_SUCCESS, ALLPRODUCTS_FAILED, ADDPRODUCT_SUCCESS, ADDPRODUCT_FAILED,
-    GETVIEWS_SUCCESS, GETVIEWS_FAILED, GETPRODUCTDETAILS_SUCCESS, GETPRODUCTDETAILS_FAILED
+    GETVIEWS_SUCCESS, GETVIEWS_FAILED, GETPRODUCTDETAILS_SUCCESS, GETPRODUCTDETAILS_FAILED, FILTEREDPRODUCT_SUCCESS
 } from '../constants/constants'
 const initialState = {
 
@@ -45,6 +45,11 @@ const getAllProductsReducer = (state = initialState, action) => {
         case GETPRODUCTDETAILS_FAILED:
             console.log("GETPRODUCTDETAILS_FAILED in reducer", action.message)
             return action.message
+        case FILTEREDPRODUCT_SUCCESS:
+            return {
+                ...state,
+                productData
+            }
         default:
             return state
     }
