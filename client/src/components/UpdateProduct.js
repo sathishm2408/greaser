@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter, Prompt } from 'react-router-dom';
 import { Button, Header, Modal, Icon, Input, Dropdown, Accordion } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { getProductDetails } from '../actions/product';
+import { getProductDetails, updateProduct } from '../actions/product';
 import './productCards.css';
 import cam from '../assets/cam.jpg'
 
@@ -21,7 +21,8 @@ class UpdateProduct extends Component {
             pic2: '',
             pic3: '',
             pic4: '',
-            pic5: ''
+            pic5: '',
+            baseUrl: 'http://localhost:3005/'
         }
     }
 
@@ -29,15 +30,6 @@ class UpdateProduct extends Component {
         console.log("Aaaaaaaaaaaaaaaa", this.props.match.params.id, this.props);
         // this.props.getProductDetails(this.props.match.params.id);
         //this.props.getAllProducts();
-    }
-
-    componentDidMount() {
-
-    }
-    componentDidUpdate() {
-        //const fileData = new window.FormData();
-        // fileData.append('file1', this.state.pic1)
-        // console.log("immmmmm", fileData);
     }
 
     getGender = (event, { value }) => {
@@ -48,9 +40,7 @@ class UpdateProduct extends Component {
     getSleeveType = (event, { value }) => {
         console.log("innnn", value);
         //this.setState({modified: true})
-        this.setState({ sleeveType: value, modified: true }, function () {
-            console.log("innnn", this.state.modified, this.state.sleeveType);
-        });
+        this.setState({ sleeveType: value, modified: true });
 
         console.log("innnn", this.state.modified, this.state.sleeveType);
     }
@@ -65,8 +55,11 @@ class UpdateProduct extends Component {
         this.setState({ category: value, modified: true })
     }
 
-    addedMessage = () => {
-        alert("Product Added Successfully");
+    addedMessage = (result, err) => {
+        if (result)
+            alert("Product Updated Successfully");
+        else
+            alert("Product Updated Failed", err);
         window.location.reload();
     }
 
@@ -99,32 +92,42 @@ class UpdateProduct extends Component {
     }
     submit = () => {
         this.setState({ modified: false })
+        console.log("gggg", document.getElementById("gender").value)
 
         const reqBody = {}
         reqBody.productName = document.getElementById("productName").value
         reqBody.description = document.getElementById("description").value
-        reqBody.gender = this.state.gender
-        reqBody.category = this.state.category
-        reqBody.sleeveType = this.state.sleeveType
-        reqBody.neckType = this.state.neckType
         reqBody.manufacturer = document.getElementById("manufacturer").value
         reqBody.salesPrice = document.getElementById("salesPrice").value
         reqBody.MRP = document.getElementById("mrp").value
         reqBody.manufactureCost = document.getElementById("manufactureCost").value
         reqBody.quantity = document.getElementById("quantity").value
+        if (this.state.gender)
+            reqBody.gender = this.state.gender
+        if (this.state.category)
+            reqBody.category = this.state.category
+        if (this.state.sleeveType)
+            reqBody.sleeveType = this.state.sleeveType
+        if (this.state.neckType)
+            reqBody.neckType = this.state.neckType
 
         console.log("reqbody", reqBody);
 
-        const fileData = new window.FormData();
-        fileData.append('file1', this.state.pic1);
-        fileData.append('data', JSON.stringify(reqBody));
+        // const fileData = new window.FormData();
+        // fileData.append('file1', this.state.pic1);
+        // fileData.append('file2', this.state.pic2);
+        // fileData.append('file3', this.state.pic3);
+        // fileData.append('file4', this.state.pic4);
+        // fileData.append('file5', this.state.pic5);
+        // fileData.append('data', JSON.stringify(reqBody));
         console.log("inside submit");
-
         //this.props.addProduct(fileData);
+        this.props.updateProduct(this.props.match.params.id, reqBody);
     }
     render() {
         console.log("1112223333", this.props.productDetails);
         let productName, description, gender, category, sleeveType, neckType, manufacturer, salesPrice, MRP, manufactureCost, quantity;
+        let pic1, pic2, pic3, pic4, pic5;
         if (this.props.productDetails) {
             productName = this.props.productDetails.productName;
             description = this.props.productDetails.description;
@@ -136,7 +139,12 @@ class UpdateProduct extends Component {
             MRP = this.props.productDetails.MRP;
             manufactureCost = this.props.productDetails.manufactureCost;
             quantity = this.props.productDetails.quantity;
-            gender = this.props.productDetails.gender
+            gender = this.props.productDetails.gender;
+            pic1 = this.props.productDetails.image1 ? this.state.baseUrl + this.props.productDetails.image1 : ''
+            pic2 = this.props.productDetails.image2 ? this.state.baseUrl + this.props.productDetails.image2 : ''
+            pic3 = this.props.productDetails.image3 ? this.state.baseUrl + this.props.productDetails.image3 : ''
+            pic4 = this.props.productDetails.image4 ? this.state.baseUrl + this.props.productDetails.image4 : ''
+            pic5 = this.props.productDetails.image5 ? this.state.baseUrl + this.props.productDetails.image5 : ''
             console.log("rrrrr", gender);
 
         }
@@ -171,7 +179,10 @@ class UpdateProduct extends Component {
         return (
             <div>
                 {
-                    (this.props.addedProducts) ? this.addedMessage() : null
+                    (this.props.updatedData) ? this.addedMessage(true) : null
+                }
+                {
+                    (this.props.errorMessage) ? this.addedMessage(false,this.props.errorMessage) : null
                 }
                 <Accordion styled>
                     <Accordion.Title
@@ -192,7 +203,7 @@ class UpdateProduct extends Component {
                                         <div className="card cardBoxSize">
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic1" src={cam} alt="products"></img>
+                                                <img className='card-img-top productimg' id="pic1" src={pic1 || cam} alt="products"></img>
 
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
@@ -215,7 +226,7 @@ class UpdateProduct extends Component {
                                         <div className="card cardBoxSize">
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic2" src={cam} alt="products"></img>
+                                                <img className='card-img-top productimg' id="pic2" src={pic2 || cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic2) ?
@@ -236,7 +247,7 @@ class UpdateProduct extends Component {
                                         <div className="card cardBoxSize">
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic3" src={cam} alt="products"></img>
+                                                <img className='card-img-top productimg' id="pic3" src={pic3 || cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic3) ?
@@ -257,7 +268,7 @@ class UpdateProduct extends Component {
                                         <div className="card cardBoxSize">
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic4" src={cam} alt="products"></img>
+                                                <img className='card-img-top productimg' id="pic4" src={pic4 || cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic4) ?
@@ -279,7 +290,7 @@ class UpdateProduct extends Component {
                                         <div className="card cardBoxSize" >
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic5" src={cam} alt="products"></img>
+                                                <img className='card-img-top productimg' id="pic5" src={pic5 || cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic5) ?
@@ -343,9 +354,9 @@ class UpdateProduct extends Component {
                             (this.state.category === "tshirt" || category === "tshirt") ?
                                 <div className="AddProduct-field">
                                     <label className="label-field">Sleeve Type</label>
-                                    <Dropdown placeholder='category' id="sleeveType" selection={true} defaultValue={sleeveType} options={sleeveOptions} onChange={this.getSleeveType} />
+                                    <Dropdown placeholder='sleeveType' id="sleeveType" selection={true} defaultValue={sleeveType} options={sleeveOptions} onChange={this.getSleeveType} />
                                     <label className="label-field">Neck Type</label>
-                                    <Dropdown placeholder='category' id="neckType" selection={true} defaultValue={neckType} options={neckTypeOptions} onChange={this.getNeckType} />
+                                    <Dropdown placeholder='neckType' id="neckType" selection={true} defaultValue={neckType} options={neckTypeOptions} onChange={this.getNeckType} />
                                 </div> : (null)
                         }
                     </Accordion.Content>
@@ -366,8 +377,8 @@ class UpdateProduct extends Component {
                             }
                             <label className="label-field">MRP</label>
                             {
-                                MRP &&  <Input type="number" id="mrp" name="mrp" defaultValue={MRP} placeholder="Enter price" />
-                            }         
+                                MRP && <Input type="number" id="mrp" name="mrp" defaultValue={MRP} placeholder="Enter price" />
+                            }
                         </div>
                         <div className="AddProduct-field">
                             <label className="label-field">Making Cost</label>
@@ -377,7 +388,7 @@ class UpdateProduct extends Component {
                             <label className="label-field">Manufacturer</label>
                             {
                                 manufacturer && <Input type="text" id="manufacturer" name="manufacturer" defaultValue={manufacturer} placeholder="manufacturer" />
-                            }    
+                            }
                         </div>
                     </Accordion.Content>
                     <Accordion.Title
@@ -394,7 +405,7 @@ class UpdateProduct extends Component {
                             <label className="label-field">quantity</label>
                             {
                                 quantity && <Input type="number" id="quantity" name="quantity" defaultValue={quantity} placeholder="Enter quantity" />
-                            }                           
+                            }
                         </div>
                         <div className="AddProduct-field">
                             <Button positive onClick={() => this.submit()}>SUBMIT</Button>
@@ -411,7 +422,11 @@ class UpdateProduct extends Component {
 
 const mapStateToProps = (state) => {
     console.log("state", state)
-    return { productDetails: state.products.productData }
+    return {
+        productDetails: state.products.productData,
+        updatedData: state.products.updatedData,
+        errorMessage: state.products.message
+    }
 }
 
-export default connect(mapStateToProps, { getProductDetails })(withRouter(UpdateProduct))
+export default connect(mapStateToProps, { getProductDetails, updateProduct })(withRouter(UpdateProduct))

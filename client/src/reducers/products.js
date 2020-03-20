@@ -1,13 +1,14 @@
 import {
     ALLPRODUCTS_SUCCESS, ALLPRODUCTS_FAILED, ADDPRODUCT_SUCCESS, ADDPRODUCT_FAILED,
-    GETVIEWS_SUCCESS, GETVIEWS_FAILED, GETPRODUCTDETAILS_SUCCESS, GETPRODUCTDETAILS_FAILED, FILTEREDPRODUCT_SUCCESS
+    GETVIEWS_SUCCESS, GETVIEWS_FAILED, GETPRODUCTDETAILS_SUCCESS, GETPRODUCTDETAILS_FAILED,
+    UPDATEPRODUCT_SUCCESS, UPDATEPRODUCT_FAILED, DELETEPRODUCT_SUCCESS, DELETEPRODUCT_FAILED, FILTEREDPRODUCT_SUCCESS
 } from '../constants/constants'
 const initialState = {
 
 };
 
 const getAllProductsReducer = (state = initialState, action) => {
-    const { type, productData } = action;
+    const { type, productData, updatedData, message } = action;
 
     switch (type) {
         case ALLPRODUCTS_SUCCESS:
@@ -44,6 +45,24 @@ const getAllProductsReducer = (state = initialState, action) => {
             }
         case GETPRODUCTDETAILS_FAILED:
             console.log("GETPRODUCTDETAILS_FAILED in reducer", action.message)
+            return { message }
+        case UPDATEPRODUCT_SUCCESS:
+            console.log("UPDATEPRODUCT_SUCCESS in reducer", type, action.updatedData)
+            return {
+                ...state,
+                updatedData
+            }
+        case UPDATEPRODUCT_FAILED:
+            console.log("UPDATEPRODUCT_FAILED in reducer", action.message)
+            return { message }
+        case DELETEPRODUCT_SUCCESS:
+            console.log("DELETEPRODUCT_SUCCESS in reducer", type, productData)
+            return {
+                ...state,
+                productData
+            }
+        case DELETEPRODUCT_FAILED:
+            console.log("DELETEPRODUCT_FAILED in reducer", action.message)
             return action.message
         case FILTEREDPRODUCT_SUCCESS:
             return {
