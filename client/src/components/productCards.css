@@ -4,6 +4,10 @@
 
 .productimg{
     margin-top: 0px;
+    height: 200px;
+    width: 85%;
+    margin-left: 5%;
+
 }
 
 .product-img{
@@ -71,4 +75,15 @@
     width: 45%;
     margin-left: 80px;
 
+
+}
+
+.img-size{
+    width:60%;
+    height: 340px;
+
+}
+
+.img-padding{
+    padding-left: 65px;
 }
