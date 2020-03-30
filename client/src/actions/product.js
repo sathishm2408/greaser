@@ -28,8 +28,8 @@ export function addProduct(reqBody) {
       return dispatch => {
 
             services.addProduct(reqBody)
-                  .then(productData => {
-                        dispatch(successAddProduct(productData), console.log("called in action", productData))
+                  .then(addedProductData => {
+                        dispatch(successAddProduct(addedProductData), console.log("called in action", addedProductData))
                   }
                   )
                   .catch(e => {
@@ -113,7 +113,7 @@ export function deleteProduct(id) {
 function success(productData) { return { type: ALLPRODUCTS_SUCCESS, productData } }
 function fail(message) { return { type: ALLPRODUCTS_FAILED, message } }
 
-function successAddProduct(productData) { return { type: ADDPRODUCT_SUCCESS, productData } }
+function successAddProduct(productData) { return { type: ADDPRODUCT_SUCCESS, addedProductData:productData } }
 function failAddProduct(message) { return { type: ADDPRODUCT_FAILED, message } }
 
 function successViews(productData) { return { type: GETVIEWS_SUCCESS, productData } }

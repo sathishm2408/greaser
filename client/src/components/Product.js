@@ -79,7 +79,7 @@ class Product extends Component {
 
 const mapStateToProps = (state) => {
     console.log("state", state)
-    return { productDetails: state.products.productData }
+    return { productDetails: state.products.productDetails }
 }
 
 export default connect(mapStateToProps, { getProductDetails })(withRouter(Product))

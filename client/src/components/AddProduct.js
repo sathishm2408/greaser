@@ -375,7 +375,8 @@ class AddProduct extends Component {
 
 const mapStateToProps = (state) => {
     console.log("state", state)
-    return { addedProducts: state.products.productData }
+    return { addedProducts: state.products.addedProductData,
+    errMessage: state.products }
 }
 
 export default connect(mapStateToProps, { addProduct })(AddProduct)

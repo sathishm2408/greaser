@@ -8,7 +8,7 @@ const initialState = {
 };
 
 const getAllProductsReducer = (state = initialState, action) => {
-    const { type, productData, updatedData, message } = action;
+    const { type, productData, addedProductData, updatedData, message } = action;
 
     switch (type) {
         case ALLPRODUCTS_SUCCESS:
@@ -20,10 +20,10 @@ const getAllProductsReducer = (state = initialState, action) => {
         case ALLPRODUCTS_FAILED:
             return action.message
         case ADDPRODUCT_SUCCESS:
-            console.log("ADDPRODUCT_SUCCESS in reducer", type, productData)
+            console.log("ADDPRODUCT_SUCCESS in reducer", type, addedProductData)
             return {
                 ...state,
-                productData
+                addedProductData
             }
         case ADDPRODUCT_FAILED:
             console.log("ADDPRODUCT_FAILED in reducer", action.message)
@@ -41,7 +41,7 @@ const getAllProductsReducer = (state = initialState, action) => {
             console.log("GETPRODUCTDETAILS_SUCCESS in reducer", type, productData)
             return {
                 ...state,
-                productData
+                productDetails:productData
             }
         case GETPRODUCTDETAILS_FAILED:
             console.log("GETPRODUCTDETAILS_FAILED in reducer", action.message)

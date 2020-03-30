@@ -30,7 +30,7 @@ router.get('/all', async (req, res) => {
         const product = await Product.find();
         //console.log(user);
         if (!product)
-            res.status(400).send("Product not found")
+            res.status(200).send("No Products in inventory. Add Products")
 
         res.send(product);
     } catch (e) {
