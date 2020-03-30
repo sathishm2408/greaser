@@ -423,7 +423,7 @@ class UpdateProduct extends Component {
 const mapStateToProps = (state) => {
     console.log("state", state)
     return {
-        productDetails: state.products.productData,
+        productDetails: state.products.productDetails,
         updatedData: state.products.updatedData,
         errorMessage: state.products.message
     }

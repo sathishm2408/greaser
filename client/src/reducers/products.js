@@ -32,7 +32,7 @@ const getAllProductsReducer = (state = initialState, action) => {
             console.log("GETVIEWS_SUCCESS in reducer", type, productData)
             return {
                 ...state,
-                productData
+                viewedData : productData
             }
         case GETVIEWS_FAILED:
             console.log("GETVIEWS_FAILED in reducer", action.message)
@@ -59,7 +59,7 @@ const getAllProductsReducer = (state = initialState, action) => {
             console.log("DELETEPRODUCT_SUCCESS in reducer", type, productData)
             return {
                 ...state,
-                productData
+                deletedData : productData
             }
         case DELETEPRODUCT_FAILED:
             console.log("DELETEPRODUCT_FAILED in reducer", action.message)
@@ -67,7 +67,7 @@ const getAllProductsReducer = (state = initialState, action) => {
         case FILTEREDPRODUCT_SUCCESS:
             return {
                 ...state,
-                productData
+                filteredData : productData
             }
         default:
             return state

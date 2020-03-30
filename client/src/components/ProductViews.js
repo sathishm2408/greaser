@@ -64,7 +64,7 @@ class ProductViews extends Component {
 const mapStateToProps = (state) => {
     console.log("state", state)
 
-    return{ViewedProducts: state.products.productData}
+    return{ViewedProducts: state.products.viewedData}
 }
 
 export default connect(mapStateToProps, { getViews })(ProductViews)

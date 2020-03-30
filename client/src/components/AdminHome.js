@@ -56,7 +56,7 @@ class AdminHome extends Component {
 const mapStateToProps = (state) => ({
 
     allProducts: state.products.productData,
-    filteredProduct: state.products.productData
+    filteredProduct: state.products.filteredData
 })
 
 export default connect(mapStateToProps, { getFilteredProduct })(AdminHome)
