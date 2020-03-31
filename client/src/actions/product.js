@@ -28,8 +28,8 @@ export function addProduct(reqBody) {
       return dispatch => {
 
             services.addProduct(reqBody)
-                  .then(addedProductData => {
-                        dispatch(successAddProduct(addedProductData), console.log("called in action", addedProductData))
+                  .then(ProductData => {
+                        dispatch(successAddProduct(ProductData), console.log("called in action", ProductData))
                   }
                   )
                   .catch(e => {

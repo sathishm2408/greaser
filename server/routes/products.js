@@ -59,6 +59,7 @@ router.post('/add', auth, picUpload, (req, res) => {
     var id = Date.now();
     var dir = `public/uploads/${id}`;
     var dir2 = `uploads/${id}`;
+    let images = [];
     var image1, image2, image3, image4, image5;
     var i = 0;
     
@@ -69,24 +70,25 @@ router.post('/add', auth, picUpload, (req, res) => {
             fs.mkdirSync('public/uploads/temp');
         console.log("moved successfully")
         fs.readdirSync(dir).forEach(file => {
-            if (i == 0)
-                image1 = dir2 + '/' + file;
-            if (i == 1)
-                image2 = dir2 + '/' + file;
-            if (i == 2)
-                image3 = dir2 + '/' + file;
-            if (i == 3)
-                image4 = dir2 + '/' + file;
-            if (i == 4)
-                image5 = dir2 + '/' + file;
-            i++;
+            images.push(dir2 + '/' + file)
+            // if (i == 0)
+            //     image1 = dir2 + '/' + file;
+            // if (i == 1)
+            //     image2 = dir2 + '/' + file;
+            // if (i == 2)
+            //     image3 = dir2 + '/' + file;
+            // if (i == 3)
+            //     image4 = dir2 + '/' + file;
+            // if (i == 4)
+            //     image5 = dir2 + '/' + file;
+            // i++;
             //console.log(file);
         });
         //console.log("iiiiii",image1,image2,image3);
         let product = new Product({
             _id: id,
             ...data,
-            image1, image2, image3, image4, image5,
+            images,
             creator: req.user._id
         });
         product.save().then(() => {

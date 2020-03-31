@@ -64,13 +64,15 @@ let ProductSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
-    image1:{},
-    image2:{},
-    image3:{},
-    image4:{},
-    image5:{},
+    images:[{
+        type: String
+    }],
     viewed: {
         type: String,
+        default: 0
+    },
+    ordered: {
+        type: Number,
         default: 0
     },
     creator:{

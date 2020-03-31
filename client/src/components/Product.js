@@ -23,11 +23,11 @@ class Product extends Component {
             <div className="product-img">
                 <div className='viewProduct img-padding' >
                     {product && <AliceCarousel mouseTrackingEnabled autoPlay={true} autoPlayInterval={4000} autoHeight={true} >
-                        <img src={baseUrl + `${product.image1}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
-                        <img src={baseUrl + `${product.image2}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
-                        <img src={baseUrl + `${product.image3}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
-                        <img src={baseUrl + `${product.image4}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
-                        <img src={baseUrl + `${product.image5}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
+                        <img src={baseUrl + `${product.images[0]}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
+                        <img src={baseUrl + `${product.images[1]}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
+                        <img src={baseUrl + `${product.images[2]}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
+                        <img src={baseUrl + `${product.images[3]}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
+                        <img src={baseUrl + `${product.images[4]}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
                     </AliceCarousel>}
 
 

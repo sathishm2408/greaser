@@ -3,11 +3,9 @@
 }
 
 .productimg{
-    margin-top: 0px;
-    height: 200px;
-    width: 85%;
-    margin-left: 5%;
-
+    margin-top: 5px !important;
+    width: 70%;
+    margin: auto;
 }
 
 .product-img{
