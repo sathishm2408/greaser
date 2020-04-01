@@ -18,18 +18,17 @@ class Product extends Component {
     render() {
         let baseUrl = 'http://localhost:3005/'
         console.log("333333333 in cards", this.props.productDetails)
-        const product = this.props.productDetails
+        const product = this.props.productDetails;
+        if(product)
+        var carousalImages = product.images.map((fileImg)=>
+        <img src={baseUrl + `${fileImg}`} onDragStart={this.handleOnDragStart} className="img-size" alt='product_image' />
+        )
         return (
             <div className="product-img">
                 <div className='viewProduct img-padding' >
                     {product && <AliceCarousel mouseTrackingEnabled autoPlay={true} autoPlayInterval={4000} autoHeight={true} >
-                        <img src={baseUrl + `${product.images[0]}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
-                        <img src={baseUrl + `${product.images[1]}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
-                        <img src={baseUrl + `${product.images[2]}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
-                        <img src={baseUrl + `${product.images[3]}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
-                        <img src={baseUrl + `${product.images[4]}`} onDragStart={this.handleOnDragStart} className="img-size" alt='uygyugygy' />
+                        {carousalImages}
                     </AliceCarousel>}
-
 
                 </div>
 

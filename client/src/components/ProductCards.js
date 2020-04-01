@@ -3,6 +3,9 @@ import product_img from '../assets/product.jpg'
 import './productCards.css';
 
 export default class ProductCards extends Component {
+    deleteProduct=(id)=>{
+        alert("Are you sure you want to delete this product");
+    }
     render() {
         console.log("pppp",this.props.product.image1)
         let baseUrl = 'http://localhost:3005/'
@@ -19,7 +22,7 @@ export default class ProductCards extends Component {
                             <p>
                                 <a href={`/admin/product/${this.props.product._id}`} className="btn btn-success card-button">View</a>
                                 <a href={`/admin/updateProduct/${this.props.product._id}`} className="btn btn-primary card-button">Update</a>
-                                <a href={`/admin/product/${this.props.product._id}`} className="btn btn-danger card-button">Delete</a>
+                                <button type="button" onClick={()=>this.deleteProduct(this.props.product._id)} className="btn btn-danger card-button">Delete</button>
                             </p>
                         </div>
                     </div>
