@@ -60,9 +60,8 @@ router.post('/add', auth, picUpload, (req, res) => {
     var dir = `public/uploads/${id}`;
     var dir2 = `uploads/${id}`;
     let images = [];
-    var image1, image2, image3, image4, image5;
     var i = 0;
-    
+
     mv('public/uploads/temp/', dir, { mkdirp: true }, function (err) {
         if (err)
             console.log("error in moving files", err);
@@ -71,20 +70,9 @@ router.post('/add', auth, picUpload, (req, res) => {
         console.log("moved successfully")
         fs.readdirSync(dir).forEach(file => {
             images.push(dir2 + '/' + file)
-            // if (i == 0)
-            //     image1 = dir2 + '/' + file;
-            // if (i == 1)
-            //     image2 = dir2 + '/' + file;
-            // if (i == 2)
-            //     image3 = dir2 + '/' + file;
-            // if (i == 3)
-            //     image4 = dir2 + '/' + file;
-            // if (i == 4)
-            //     image5 = dir2 + '/' + file;
-            // i++;
+
             //console.log(file);
         });
-        //console.log("iiiiii",image1,image2,image3);
         let product = new Product({
             _id: id,
             ...data,
@@ -158,12 +146,29 @@ router.delete('/:id', auth, async (req, res) => {
     let creator = req.user._id;
     try {
         const product = await Product.findOneAndDelete({ _id: req.params.id, creator: req.user._id });
-        //console.log(user);
+        console.log("in backend delete", product);
 
         if (!product)
             res.status(400).send("Product not found")
+        else if (fs.existsSync(`public/uploads/${req.params.id}`)) {
+            fs.readdirSync(`public/uploads/${req.params.id}`).forEach(file => {
+                fs.unlinkSync(`public/uploads/${req.params.id}/${file}`, err => {
+                    if (err)
+                        console.log("err", err)
+                    console.log(file + " delted");
+                })
+                console.log(file + "found");
 
-        res.send(product);
+            })
+            fs.rmdirSync(`public/uploads/${req.params.id}`);
+            // }
+            // fs.remove(`public/uploads/${req.params.id}`)
+            console.log("folder exists");
+
+            res.send(product);
+        }
+        else
+            res.send(product);
     } catch (e) {
         res.status(400).send(e);
     }

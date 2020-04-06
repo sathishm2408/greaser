@@ -1,12 +1,20 @@
 import React, { Component } from 'react';
-import product_img from '../assets/product.jpg'
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {deleteProduct} from '../actions/product'
 import './productCards.css';
 
-export default class ProductCards extends Component {
-    deleteProduct=(id)=>{
-        alert("Are you sure you want to delete this product");
+class ProductCards extends Component {
+    deleteProducts=(id)=>{
+        var delConfirm= window.confirm("Are you sure you want to delete this product");
+        if(delConfirm == true)
+            this.props.deleteProduct(id)
     }
     render() {
+        if(this.props.deletedProduct){
+            window.location.reload();
+            this.props.deletedProduct = null;
+        }
         console.log("pppp",this.props.product.image1)
         let baseUrl = 'http://localhost:3005/'
         return (
@@ -22,7 +30,7 @@ export default class ProductCards extends Component {
                             <p>
                                 <a href={`/admin/product/${this.props.product._id}`} className="btn btn-success card-button">View</a>
                                 <a href={`/admin/updateProduct/${this.props.product._id}`} className="btn btn-primary card-button">Update</a>
-                                <button type="button" onClick={()=>this.deleteProduct(this.props.product._id)} className="btn btn-danger card-button">Delete</button>
+                                <button type="button" onClick={()=>this.deleteProducts(this.props.product._id)} className="btn btn-danger card-button">Delete</button>
                             </p>
                         </div>
                     </div>
@@ -30,3 +38,10 @@ export default class ProductCards extends Component {
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    console.log("state", state)
+    return { deletedProduct: state.products.deletedData }
+}
+
+export default connect(mapStateToProps, { deleteProduct })(withRouter(ProductCards))
