@@ -22,6 +22,11 @@ class UpdateProduct extends Component {
             pic3: '',
             pic4: '',
             pic5: '',
+            pic1Modified: false,
+            pic2Modified: false,
+            pic3Modified: false,
+            pic4Modified: false,
+            pic5Modified: false,
             baseUrl: 'http://localhost:3005/'
         }
     }
@@ -31,6 +36,14 @@ class UpdateProduct extends Component {
         // this.props.getProductDetails(this.props.match.params.id);
         //this.props.getAllProducts();
     }
+
+    // componentDidMount(){
+    //     console.log("Bbbbbbbbbbbbbbbbbb", this.props);
+    // }
+
+    // componentWillUpdate(){
+    //     console.log("Ccccccccccccccccccc", this.props);
+    // }
 
     getGender = (event, { value }) => {
         console.log("innnn", value);
@@ -90,6 +103,27 @@ class UpdateProduct extends Component {
         if (img === "pic5")
             this.setState({ pic5: event.target.files[0] })
     }
+
+    remove_image = (img) => {
+        console.log("in remove img");
+
+        var output = document.getElementById(img);
+        output.src = cam;
+
+        if (img === "pic1") {
+            // this.props.productDetails.images[0] = null;
+            this.setState({ pic1Modified: true, pic1: null });
+        }
+        if (img === "pic2")
+            this.setState({ pic2: null, pic2Modified: true })
+        if (img === "pic3")
+            this.setState({ pic3: null, pic3Modified: true })
+        if (img === "pic4")
+            this.setState({ pic4: null, pic4Modified: true })
+        if (img === "pic5")
+            this.setState({ pic5: null, pic5Modified: true })
+    }
+
     submit = () => {
         this.setState({ modified: false })
         console.log("gggg", document.getElementById("gender").value)
@@ -113,20 +147,21 @@ class UpdateProduct extends Component {
 
         console.log("reqbody", reqBody);
 
-        // const fileData = new window.FormData();
-        // fileData.append('file1', this.state.pic1);
-        // fileData.append('file2', this.state.pic2);
-        // fileData.append('file3', this.state.pic3);
-        // fileData.append('file4', this.state.pic4);
-        // fileData.append('file5', this.state.pic5);
-        // fileData.append('data', JSON.stringify(reqBody));
-        console.log("inside submit");
-        //this.props.addProduct(fileData);
-        this.props.updateProduct(this.props.match.params.id, reqBody);
+        const fileData = new window.FormData();
+        fileData.append('file1', this.state.pic1);
+        fileData.append('file2', this.state.pic2);
+        fileData.append('file3', this.state.pic3);
+        fileData.append('file4', this.state.pic4);
+        fileData.append('file5', this.state.pic5);
+        fileData.append('data', JSON.stringify(reqBody));
+        console.log("filedata", fileData);
+
+        this.props.updateProduct(this.props.match.params.id, fileData);
     }
     render() {
         console.log("1112223333", this.props.productDetails);
         let productName, description, gender, category, sleeveType, neckType, manufacturer, salesPrice, MRP, manufactureCost, quantity;
+        let noPic1, noPic2, noPic3, noPic4, noPic5;
         let pic1, pic2, pic3, pic4, pic5;
         if (this.props.productDetails) {
             productName = this.props.productDetails.productName;
@@ -140,13 +175,22 @@ class UpdateProduct extends Component {
             manufactureCost = this.props.productDetails.manufactureCost;
             quantity = this.props.productDetails.quantity;
             gender = this.props.productDetails.gender;
-            pic1 = this.props.productDetails.image1 ? this.state.baseUrl + this.props.productDetails.image1 : ''
-            pic2 = this.props.productDetails.image2 ? this.state.baseUrl + this.props.productDetails.image2 : ''
-            pic3 = this.props.productDetails.image3 ? this.state.baseUrl + this.props.productDetails.image3 : ''
-            pic4 = this.props.productDetails.image4 ? this.state.baseUrl + this.props.productDetails.image4 : ''
-            pic5 = this.props.productDetails.image5 ? this.state.baseUrl + this.props.productDetails.image5 : ''
+            pic1 = this.props.productDetails.images[0] ? this.state.baseUrl + this.props.productDetails.images[0] : ''
+            pic2 = this.props.productDetails.images[1] ? this.state.baseUrl + this.props.productDetails.images[1] : ''
+            pic3 = this.props.productDetails.images[2] ? this.state.baseUrl + this.props.productDetails.images[2] : ''
+            pic4 = this.props.productDetails.images[3] ? this.state.baseUrl + this.props.productDetails.images[3] : ''
+            pic5 = this.props.productDetails.images[4] ? this.state.baseUrl + this.props.productDetails.images[4] : ''
             console.log("rrrrr", gender);
-
+            if (pic1 == '')
+                noPic1 = true;
+            if (pic2 == '')
+                noPic2 = true;
+            if (pic3 == '')
+                noPic3 = true;
+            if (pic4 == '')
+                noPic4 = true;
+            if (pic5 == '')
+                noPic5 = true;
         }
 
         const { activeIndex } = this.state
@@ -182,7 +226,7 @@ class UpdateProduct extends Component {
                     (this.props.updatedData) ? this.addedMessage(true) : null
                 }
                 {
-                    (this.props.errorMessage) ? this.addedMessage(false,this.props.errorMessage) : null
+                    (this.props.errorMessage) ? this.addedMessage(false, this.props.errorMessage) : null
                 }
                 <Accordion styled>
                     <Accordion.Title
@@ -199,18 +243,20 @@ class UpdateProduct extends Component {
                             <div className="d-flex flex-row">
                                 <div className="p-2">
                                     <div className="d-flex justify-content-between">
-
                                         <div className="card cardBoxSize">
-
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic1" src={pic1 || cam} alt="products"></img>
+                                                <img className='card-img-top addimg' id="pic1" src={pic1 || cam} alt="products"></img>
 
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic1) ?
-                                                            <input type="file" className="inputImgStyle" name="img1" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic1")} />
+                                                            ((this.state.pic1Modified || noPic1) ?
+
+                                                                <input type="file" className="inputImgStyle" name="img1" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic1")} />
+                                                                :
+                                                                <button onClick={() => this.remove_image("pic1")}>Remove</button>)
                                                             :
-                                                            <button >Remove</button>
+                                                            <button onClick={() => this.remove_image("pic1")}>Remove</button>
                                                     }
                                                 </div>
                                             </div>
@@ -226,13 +272,16 @@ class UpdateProduct extends Component {
                                         <div className="card cardBoxSize">
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic2" src={pic2 || cam} alt="products"></img>
+                                                <img className='card-img-top addimg' id="pic2" src={pic2 || cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic2) ?
-                                                            <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic2")} />
+                                                            ((this.state.pic2Modified || noPic2) ?
+                                                                <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic2")} />
+                                                                :
+                                                                <button onClick={() => this.remove_image("pic2")}>Remove</button>)
                                                             :
-                                                            <button >Remove</button>
+                                                            <button onClick={() => this.remove_image("pic2")}>Remove</button>
                                                     }
                                                 </div>
                                             </div>
@@ -247,13 +296,16 @@ class UpdateProduct extends Component {
                                         <div className="card cardBoxSize">
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic3" src={pic3 || cam} alt="products"></img>
+                                                <img className='card-img-top addimg' id="pic3" src={pic3 || cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic3) ?
-                                                            <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic3")} />
+                                                            ((this.state.pic3Modified || noPic3) ?
+                                                                <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic3")} />
+                                                                :
+                                                                <button onClick={() => this.remove_image("pic3")}>Remove</button>)
                                                             :
-                                                            <button >Remove</button>
+                                                            <button onClick={() => this.remove_image("pic3")}>Remove</button>
                                                     }
                                                 </div>
                                             </div>
@@ -268,13 +320,16 @@ class UpdateProduct extends Component {
                                         <div className="card cardBoxSize">
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic4" src={pic4 || cam} alt="products"></img>
+                                                <img className='card-img-top addimg' id="pic4" src={pic4 || cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic4) ?
-                                                            <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic4")} />
+                                                            ((this.state.pic4Modified || noPic4) ?
+                                                                <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic4")} />
+                                                                :
+                                                                <button onClick={() => this.remove_image("pic4")}>Remove</button>)
                                                             :
-                                                            <button >Remove</button>
+                                                            <button onClick={() => this.remove_image("pic4")}>Remove</button>
                                                     }
                                                 </div>
                                             </div>
@@ -290,13 +345,16 @@ class UpdateProduct extends Component {
                                         <div className="card cardBoxSize" >
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic5" src={pic5 || cam} alt="products"></img>
+                                                <img className='card-img-top addimg' id="pic5" src={pic5 || cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic5) ?
-                                                            <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic5")} />
+                                                            ((this.state.pic5Modified || noPic5) ?
+                                                                <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic5")} />
+                                                                :
+                                                                <button onClick={() => this.remove_image("pic5")}>Remove</button>)
                                                             :
-                                                            <button >Remove</button>
+                                                            <button onClick={() => this.remove_image("pic5")}>Remove</button>
                                                     }
                                                 </div>
                                             </div>

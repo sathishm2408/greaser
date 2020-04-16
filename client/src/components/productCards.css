@@ -8,6 +8,12 @@
     margin: auto;
 }
 
+.addimg{
+    margin-bottom: 15px !important;
+    width: 100%;
+    margin: auto;
+}
+
 .product-img{
     margin-top: 50px;
     display: flex;

@@ -9,7 +9,8 @@ var storage = multer.diskStorage({
         cb(null, 'public/uploads/temp/')
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname)
+        var extension = '.' + file.originalname.split('.').pop();
+        cb(null, file.fieldname + extension)
     }
 });
 var upload = multer({ storage: storage })
@@ -99,9 +100,13 @@ router.get('/myProducts', auth, async (req, res) => {
     }
 });
 
-router.put('/update/:id', auth, async (req, res) => {
-    //console.log(req.body);
-    const updates = Object.keys(req.body);
+router.put('/update/:id', auth, picUpload, async (req, res) => {
+    console.log(req.body);
+    let images = [];
+    var data = JSON.parse(req.body.data);
+    const updates = Object.keys(data);
+    console.log("updates " + updates + "data" + data);
+
     let updatedBy = req.user._id;
     let updatedTime = new Date();
     const updater = { updatedBy, updatedTime }
@@ -112,9 +117,36 @@ router.put('/update/:id', auth, async (req, res) => {
             res.status(400).send("Your products are not found")
 
         updates.forEach((update) => {
-            product[update] = req.body[update];
+            product[update] = data[update];
         });
         product.updates.push(updater);
+
+
+        // if (fs.existsSync(`public/uploads/${req.params.id}`)) {
+        //     fs.readdirSync(`public/uploads/${req.params.id}`).forEach(img => {
+        //         var images = img.split('.')[0]
+        //         console.log(images);
+        //         if (images === file.fieldname)
+        //             fs.unlinkSync(`public/uploads/${req.params.id}/${img}`, err => {
+        //                 if (err)
+        //                     console.log("error while deleting file for updation",err);
+        //             })
+        //             cb(null,`public/uploads/${req.params.id}`)
+        //     })
+        // }
+
+        fs.readdirSync('public/uploads/temp').forEach(file => {
+            mv(`public/uploads/temp/${file}`, `public/uploads/${req.params.id}/${file}`, function (err) {
+                if (err)
+                    console.log("error while moving files in updating", err);
+            })
+        })
+
+        fs.readdirSync(`public/uploads/${req.params.id}`).forEach(file => {
+            images.push(`uploads/${req.params.id}/${file}`)
+        });
+
+        product.images = images;
         await product.save();
         res.send(product);
     } catch (e) {

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter, Prompt } from 'react-router-dom';
-import { Button, Header, Modal, Icon, Input, Dropdown, Accordion } from 'semantic-ui-react';
+import { Button, Icon, Input, Dropdown, Accordion } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { addProduct } from '../actions/product';
 import './productCards.css';
 import cam from '../assets/cam.jpg'
 
-class AddProduct extends Component {
+export class AddProduct extends Component {
     state = {
         modified: false,
         gender: '',
@@ -21,7 +21,7 @@ class AddProduct extends Component {
         pic5: ''
     }
     UNSAFE_componentWillMount() {
-        console.log("wwwwww",Date.now())
+        console.log("wwwwww", Date.now())
         console.log("Aaaaaaaaaaaaaaaa", this.props);
         //this.props.getAllProducts();
     }
@@ -89,6 +89,25 @@ class AddProduct extends Component {
         if (img === "pic5")
             this.setState({ pic5: event.target.files[0] })
     }
+
+    remove_image = (img) => {
+        console.log("in remove img");
+        
+        var output = document.getElementById(img);
+            output.src = cam;
+
+        if (img === "pic1")
+            this.setState({ pic1: null })
+        if (img === "pic2")
+            this.setState({ pic2: null })
+        if (img === "pic3")
+            this.setState({ pic3: null })
+        if (img === "pic4")
+            this.setState({ pic4: null })
+        if (img === "pic5")
+            this.setState({ pic5: null })
+    }
+
     submit = () => {
         this.setState({ modified: false })
 
@@ -175,14 +194,14 @@ class AddProduct extends Component {
                                         <div className="card cardBoxSize">
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic1" src={cam} alt="products"></img>
+                                                <img className='card-img-top addimg' id="pic1" src={cam} alt="products"></img>
 
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic1) ?
                                                             <input type="file" className="inputImgStyle" name="img1" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic1")} />
                                                             :
-                                                            <button >Remove</button>
+                                                            <button onClick={() => this.remove_image("pic1")}>Remove</button>
                                                     }
                                                 </div>
                                             </div>
@@ -198,13 +217,13 @@ class AddProduct extends Component {
                                         <div className="card cardBoxSize">
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic2" src={cam} alt="products"></img>
+                                                <img className='card-img-top addimg' id="pic2" src={cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic2) ?
                                                             <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic2")} />
                                                             :
-                                                            <button >Remove</button>
+                                                            <button onClick={() => this.remove_image("pic2")}>Remove</button>
                                                     }
                                                 </div>
                                             </div>
@@ -219,13 +238,13 @@ class AddProduct extends Component {
                                         <div className="card cardBoxSize">
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic3" src={cam} alt="products"></img>
+                                                <img className='card-img-top addimg' id="pic3" src={cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic3) ?
                                                             <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic3")} />
                                                             :
-                                                            <button >Remove</button>
+                                                            <button onClick={() => this.remove_image("pic3")}>Remove</button>
                                                     }
                                                 </div>
                                             </div>
@@ -240,13 +259,13 @@ class AddProduct extends Component {
                                         <div className="card cardBoxSize">
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic4" src={cam} alt="products"></img>
+                                                <img className='card-img-top addimg' id="pic4" src={cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic4) ?
                                                             <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic4")} />
                                                             :
-                                                            <button >Remove</button>
+                                                            <button onClick={() => this.remove_image("pic4")}>Remove</button>
                                                     }
                                                 </div>
                                             </div>
@@ -262,13 +281,13 @@ class AddProduct extends Component {
                                         <div className="card cardBoxSize" >
 
                                             <div className="card-body">
-                                                <img className='card-img-top productimg' id="pic5" src={cam} alt="products"></img>
+                                                <img className='card-img-top addimg' id="pic5" src={cam} alt="products"></img>
                                                 <div style={{ "textAlign": "center" }}>
                                                     {
                                                         (!this.state.pic5) ?
                                                             <input type="file" className="inputImgStyle" accept="image/*" size="10" onChange={(event) => this.preview_image(event, "pic5")} />
                                                             :
-                                                            <button >Remove</button>
+                                                            <button onClick={() => this.remove_image("pic5")}>Remove</button>
                                                     }
                                                 </div>
                                             </div>
@@ -320,7 +339,7 @@ class AddProduct extends Component {
                                     <Dropdown placeholder='category' id="sleeveType" selection={true} options={sleeveOptions} onChange={this.getSleeveType} />
                                     <label className="label-field">Neck Type</label>
                                     <Dropdown placeholder='category' id="neckType" selection={true} options={neckTypeOptions} onChange={this.getNeckType} />
-                                </div>:(null)
+                                </div> : (null)
                         }
                     </Accordion.Content>
 
@@ -375,8 +394,10 @@ class AddProduct extends Component {
 
 const mapStateToProps = (state) => {
     console.log("state", state)
-    return { addedProducts: state.products.addedProductData,
-    errMessage: state.products }
+    return {
+        addedProducts: state.products.addedProductData,
+        errMessage: state.products
+    }
 }
 
 export default connect(mapStateToProps, { addProduct })(AddProduct)

@@ -15,7 +15,7 @@ class ProductCards extends Component {
             window.location.reload();
             this.props.deletedProduct = null;
         }
-        console.log("pppp",this.props.product.image1)
+        console.log("pppp",this.props.product.images[0])
         let baseUrl = 'http://localhost:3005/'
         return (
                 <div className="col-lg-4 col-md-4 col-xs-6">
@@ -43,5 +43,5 @@ const mapStateToProps = (state) => {
     console.log("state", state)
     return { deletedProduct: state.products.deletedData }
 }
-
-export default connect(mapStateToProps, { deleteProduct })(withRouter(ProductCards))
+//withRouter has been removed, if u face any problrm paste withRouter
+export default connect(mapStateToProps, { deleteProduct })((ProductCards))

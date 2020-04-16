@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { getAllProducts, getFilteredProduct } from '../actions/product';
 import './productCards.css';
 
-class AdminHome extends Component {
+export class AdminHome extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -14,7 +14,7 @@ class AdminHome extends Component {
 
 
     render() {
-        console.log(this.props.filteredProduct, "in product page Its coming!!!!!")
+        //console.log(this.props.filteredProduct, "in product page Its coming!!!!!")
         let data = [];
         let allProducts = this.props.filteredProduct && this.props.filteredProduct != null ? this.props.filteredProduct : this.props.allProducts;
         //console.log("44444444",allProducts);

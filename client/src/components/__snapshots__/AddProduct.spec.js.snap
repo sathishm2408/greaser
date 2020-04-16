@@ -1,0 +1,489 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test productCards component should not crash AddProduct 1`] = `
+<div>
+  <Accordion
+    styled={true}
+  >
+    <AccordionTitle
+      active={true}
+      index={0}
+      onClick={[Function]}
+    >
+      <Icon
+        as="i"
+        name="dropdown"
+      />
+      Product Image
+    </AccordionTitle>
+    <AccordionContent
+      active={true}
+    >
+      <div
+        className="flexFooter"
+      >
+        <div
+          className="d-flex flex-row"
+        >
+          <div
+            className="p-2"
+          >
+            <div
+              className="d-flex justify-content-between"
+            >
+              <div
+                className="card cardBoxSize"
+              >
+                <div
+                  className="card-body"
+                >
+                  <img
+                    alt="products"
+                    className="card-img-top addimg"
+                    id="pic1"
+                    src="cam.jpg"
+                  />
+                  <div
+                    style={
+                      Object {
+                        "textAlign": "center",
+                      }
+                    }
+                  >
+                    <input
+                      accept="image/*"
+                      className="inputImgStyle"
+                      name="img1"
+                      onChange={[Function]}
+                      size="10"
+                      type="file"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="p-2"
+          >
+            <div
+              className="d-flex justify-content-between"
+            >
+              <div
+                className="card cardBoxSize"
+              >
+                <div
+                  className="card-body"
+                >
+                  <img
+                    alt="products"
+                    className="card-img-top addimg"
+                    id="pic2"
+                    src="cam.jpg"
+                  />
+                  <div
+                    style={
+                      Object {
+                        "textAlign": "center",
+                      }
+                    }
+                  >
+                    <input
+                      accept="image/*"
+                      className="inputImgStyle"
+                      onChange={[Function]}
+                      size="10"
+                      type="file"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="p-2"
+          >
+            <div
+              className="d-flex justify-content-between"
+            >
+              <div
+                className="card cardBoxSize"
+              >
+                <div
+                  className="card-body"
+                >
+                  <img
+                    alt="products"
+                    className="card-img-top addimg"
+                    id="pic3"
+                    src="cam.jpg"
+                  />
+                  <div
+                    style={
+                      Object {
+                        "textAlign": "center",
+                      }
+                    }
+                  >
+                    <input
+                      accept="image/*"
+                      className="inputImgStyle"
+                      onChange={[Function]}
+                      size="10"
+                      type="file"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="p-2"
+          >
+            <div
+              className="d-flex justify-content-between"
+            >
+              <div
+                className="card cardBoxSize"
+              >
+                <div
+                  className="card-body"
+                >
+                  <img
+                    alt="products"
+                    className="card-img-top addimg"
+                    id="pic4"
+                    src="cam.jpg"
+                  />
+                  <div
+                    style={
+                      Object {
+                        "textAlign": "center",
+                      }
+                    }
+                  >
+                    <input
+                      accept="image/*"
+                      className="inputImgStyle"
+                      onChange={[Function]}
+                      size="10"
+                      type="file"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="p-2"
+          >
+            <div
+              className="d-flex justify-content-between"
+            >
+              <div
+                className="card cardBoxSize"
+              >
+                <div
+                  className="card-body"
+                >
+                  <img
+                    alt="products"
+                    className="card-img-top addimg"
+                    id="pic5"
+                    src="cam.jpg"
+                  />
+                  <div
+                    style={
+                      Object {
+                        "textAlign": "center",
+                      }
+                    }
+                  >
+                    <input
+                      accept="image/*"
+                      className="inputImgStyle"
+                      onChange={[Function]}
+                      size="10"
+                      type="file"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </AccordionContent>
+    <AccordionTitle
+      active={false}
+      index={1}
+      onClick={[Function]}
+    >
+      <Icon
+        as="i"
+        name="dropdown"
+      />
+      Product Info
+    </AccordionTitle>
+    <AccordionContent
+      active={false}
+    >
+      <div
+        className="AddProduct-field"
+      >
+        <label
+          className="label-field"
+        >
+          Product Name
+        </label>
+        <Input
+          autoFocus={true}
+          id="productName"
+          name="productName"
+          placeholder="Enter productName."
+          type="text"
+        />
+      </div>
+      <div
+        className="AddProduct-field"
+      >
+        <label
+          className="label-field"
+        >
+          Description
+        </label>
+        <Input
+          id="description"
+          name="description"
+          placeholder="Enter Description"
+          type="text"
+        />
+      </div>
+    </AccordionContent>
+    <AccordionTitle
+      active={false}
+      index={2}
+      onClick={[Function]}
+    >
+      <Icon
+        as="i"
+        name="dropdown"
+      />
+      Product Types
+    </AccordionTitle>
+    <AccordionContent
+      active={false}
+    >
+      <div
+        className="AddProduct-field"
+      >
+        <label
+          className="label-field"
+        >
+          Gender
+        </label>
+        <Dropdown
+          additionLabel="Add "
+          additionPosition="top"
+          closeOnBlur={true}
+          closeOnEscape={true}
+          deburr={false}
+          icon="dropdown"
+          id="gender"
+          minCharacters={1}
+          noResultsMessage="No results found."
+          onChange={[Function]}
+          openOnFocus={true}
+          options={
+            Array [
+              Object {
+                "key": 1,
+                "text": "Male",
+                "value": "male",
+              },
+              Object {
+                "key": 2,
+                "text": "Female",
+                "value": "female",
+              },
+            ]
+          }
+          placeholder="gender"
+          renderLabel={[Function]}
+          searchInput="text"
+          selectOnBlur={true}
+          selectOnNavigation={true}
+          selection={true}
+          wrapSelection={true}
+        />
+        <label
+          className="label-field"
+        >
+          Category
+        </label>
+        <Dropdown
+          additionLabel="Add "
+          additionPosition="top"
+          closeOnBlur={true}
+          closeOnEscape={true}
+          deburr={false}
+          icon="dropdown"
+          id="category"
+          minCharacters={1}
+          noResultsMessage="No results found."
+          onChange={[Function]}
+          openOnFocus={true}
+          options={
+            Array [
+              Object {
+                "key": 1,
+                "text": "Tshirt",
+                "value": "Tshirt",
+              },
+              Object {
+                "key": 2,
+                "text": "Shirt",
+                "value": "Shirt",
+              },
+              Object {
+                "key": 3,
+                "text": "Denim",
+                "value": "Denim",
+              },
+              Object {
+                "key": 4,
+                "text": "Joggers",
+                "value": "Joggers",
+              },
+              Object {
+                "key": 5,
+                "text": "Trousers",
+                "value": "Trousers",
+              },
+            ]
+          }
+          placeholder="category"
+          renderLabel={[Function]}
+          searchInput="text"
+          selectOnBlur={true}
+          selectOnNavigation={true}
+          selection={true}
+          wrapSelection={true}
+        />
+      </div>
+    </AccordionContent>
+    <AccordionTitle
+      active={false}
+      index={3}
+      onClick={[Function]}
+    >
+      <Icon
+        as="i"
+        name="dropdown"
+      />
+      Prices
+    </AccordionTitle>
+    <AccordionContent
+      active={false}
+    >
+      <div
+        className="AddProduct-field"
+      >
+        <label
+          className="label-field"
+        >
+          SalesPrice
+        </label>
+        <Input
+          id="salesPrice"
+          name="salesPrice"
+          placeholder="Enter price"
+          type="number"
+        />
+        <label
+          className="label-field"
+        >
+          MRP
+        </label>
+        <Input
+          id="mrp"
+          name="mrp"
+          placeholder="Enter price"
+          type="number"
+        />
+      </div>
+      <div
+        className="AddProduct-field"
+      >
+        <label
+          className="label-field"
+        >
+          Making Cost
+        </label>
+        <Input
+          id="manufactureCost"
+          name="manufactureCost"
+          placeholder="Enter price"
+          type="number"
+        />
+        <label
+          className="label-field"
+        >
+          Manufacturer
+        </label>
+        <Input
+          id="manufacturer"
+          name="manufacturer"
+          placeholder="manufacturer"
+          type="text"
+        />
+      </div>
+    </AccordionContent>
+    <AccordionTitle
+      active={false}
+      index={4}
+      onClick={[Function]}
+    >
+      <Icon
+        as="i"
+        name="dropdown"
+      />
+      Inventory
+    </AccordionTitle>
+    <AccordionContent
+      active={false}
+    >
+      <div
+        className="AddProduct-field"
+      >
+        <label
+          className="label-field"
+        >
+          quantity
+        </label>
+        <Input
+          id="quantity"
+          name="quantity"
+          placeholder="Enter quantity"
+          type="number"
+        />
+      </div>
+      <div
+        className="AddProduct-field"
+      >
+        <Button
+          as="button"
+          onClick={[Function]}
+          positive={true}
+        >
+          SUBMIT
+        </Button>
+      </div>
+    </AccordionContent>
+  </Accordion>
+  <Prompt
+    message="Are you sure you want to leave this page?"
+    when={false}
+  />
+</div>
+`;
