@@ -26,7 +26,7 @@ ReactDOM.render(
         <Router>
             <Suspense fallback={<h1>Loading...</h1>}>
                 <Switch>
-                    <Route exact path='/admin' render={(props) => <AdminHeader><AdminHome /></AdminHeader>}></Route>
+                    <Route exact path='/' render={() => <AdminHeader><AdminHome /></AdminHeader>}></Route>
                     <Route exact path='/admin/product/:id' render={() => <AdminHeader><Product /></AdminHeader>}></Route>
                     <Route exact path='/admin/AddProduct' render={() => <AdminHeader><AddProduct /></AdminHeader>}></Route>
                     <Route exact path='/admin/updateProduct/:id' render={() => <AdminHeader><UpdateProduct /></AdminHeader>}></Route>
