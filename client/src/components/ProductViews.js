@@ -6,7 +6,7 @@ import Chart from './Chart';
 
 import './productCards.css';
 
-class ProductViews extends Component {
+export class ProductViews extends Component {
     constructor(props) {
         super(props)
         this.state = {

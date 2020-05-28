@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
 import toJson from 'enzyme-to-json';
-import {AddProduct} from './AddProduct.js';
+import {AddProduct} from '../../components/AddProduct.js';
 
 describe('test productCards component',()=>{
     let wrapper;

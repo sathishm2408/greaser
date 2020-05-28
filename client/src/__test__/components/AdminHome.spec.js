@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
 const mockStore = configureMockStore();
 
-import {AdminHome} from './AdminHome.js';
+import {AdminHome} from '../../components/AdminHome.js';
 
 describe('test AdminHome component', () => {
     let wrapper;

@@ -21,7 +21,6 @@ export class AddProduct extends Component {
         pic5: ''
     }
     UNSAFE_componentWillMount() {
-        console.log("wwwwww", Date.now())
         console.log("Aaaaaaaaaaaaaaaa", this.props);
         //this.props.getAllProducts();
     }
