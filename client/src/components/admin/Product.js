@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Card, Button } from 'react-bootstrap';
-import { getProductDetails } from '../actions/product'
+import { getProductDetails } from '../../actions/product'
 import './productCards.css';
 import AliceCarousel from 'react-alice-carousel'
 import 'react-alice-carousel/lib/alice-carousel.css'

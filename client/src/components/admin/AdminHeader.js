@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-//import { Link } from 'react-router-dom';
-import { Redirect } from "react-router-dom";
-import { withRouter } from 'react-router-dom';
+// import { Redirect } from "react-router-dom";
+import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
-import AdminHome from './AdminHome'
+// import AdminHome from './AdminHome'
 //import history from 'history';
-import { Button, Header, Modal, Icon, Input } from 'semantic-ui-react';
-import { login, logout, signup } from '../actions/users';
-import { getFilteredProduct, getAllProducts } from '../actions/product'
-import '../index.css'
+import { Modal, Icon, Input } from 'semantic-ui-react';
+import { login, logout, signup } from '../../actions/users';
+import { getFilteredProduct, getAllProducts } from '../../actions/product'
+import './index.css'
 
 class AdminHeaderComponent extends Component {
 
@@ -33,11 +32,6 @@ class AdminHeaderComponent extends Component {
     // componentDidMount() {
     //     this.props.getAllProducts();
     // }
-
-    // componentWillReceiveProps(newProps) {
-    //     this.setState({ products: newProps.products });
-    // }
-
 
     show = (tab) => {
         this.setState({ open: true })
@@ -113,11 +107,6 @@ class AdminHeaderComponent extends Component {
     // componentDidMount() {
     //     this.props.getAllProducts();
     // }
-    // componentWillReceiveProps(newProps) {
-    //     this.setState({ products: newProps.products }, () => {
-    //         console.log(this.state.products, "products data")
-    //     });
-    // }
 
     emailError = () => {
         return (
@@ -144,7 +133,7 @@ class AdminHeaderComponent extends Component {
         console.log(e.target.value, "value e")
         let filteredProducts = [...this.props.products.productData]
 
-        if (e.target.value != '') {
+        if (e.target.value !== '') {
             filteredProducts = this.props.products.productData.filter(product => {
                 return (product.productName.toLowerCase().indexOf(e.target.value.toLowerCase()) >= 0);
             });
@@ -270,7 +259,7 @@ class AdminHeaderComponent extends Component {
             <div>
                 <nav className="navbar navbar-expand-md bg-dark navbar-dark edited">
 
-                    <a className="navbar-brand" href="/admin">Product Inventory</a>
+                    <Link className="navbar-brand" to="/admin">Product Inventory</Link>
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
                         <span className="navbar-toggler-icon"></span>
@@ -279,13 +268,13 @@ class AdminHeaderComponent extends Component {
                     <div className="collapse navbar-collapse" id="collapsibleNavbar">
                         <ul className="navbar-nav justify-content-center ml-auto">
                             <li className="nav-item">
-                                <a className="nav-link" href="/admin/Addproduct">Add Product</a>
+                                <Link className="nav-link" to="/admin/Addproduct">Add Product</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/admin/views">Views</a>
+                                <Link className="nav-link" to="/admin/views">Views</Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/">Orders</a>
+                                <Link className="nav-link" to="/">Orders</Link>
                             </li>
                             <li className="nav-item ">
                                 <Form.Control type="text" placeholder="Search Product" onChange={this.onSearch} className='search' />

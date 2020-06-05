@@ -1,0 +1,159 @@
+.mapDiv:last-child{
+    margin-bottom: 80px;
+}
+.priceNameDiv{
+    float: right;
+    margin-top: 25px;
+}
+
+.price{
+    float: right;
+}
+
+
+.cartdiv{
+    width:70vw;
+    float: left;   
+}
+
+.cartSummary{
+    position: relative;
+    height: 15vw;
+    width: 20vw;
+    float: right;
+    border-radius: 5px 5px 5px 5px;
+    border-color: white;
+    box-shadow: 0 0 3px 4px rgb(214, 201, 201);
+    margin-right: 0.5vw;
+    margin-top: 4vw;
+}
+.pimage{
+    width: 220px;
+    float: left;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.pimage >img{
+    height: 80px;
+}
+ul{
+    display: block;
+ box-sizing: border-box;
+}
+
+.contentDiv{
+    margin-left: 50px;
+    /* padding-bottom: 20px; */
+    box-sizing: border-box;
+    width: 50%;
+    display: inline-block;
+    
+}
+li{
+    margin: 0;
+    list-style: none;
+    display: list-item;  
+}
+span{
+    margin: 0;
+}
+
+.secondContentDiv{
+    margin-left: 40px;
+}
+
+.proceedToBuyButton{
+position: absolute;
+bottom: 5%;
+width: 80%;
+margin-left: 25px;
+background-color: #febd69;
+border: none;
+border: 2px solid #f3a847;
+border-radius: 5px;
+padding: 4px 0px;
+}
+h3{
+    margin-top:10px;
+    margin-left:10px;
+}
+.cart_items {
+    width:15vw;
+    height:15vh;
+} 
+hr { 
+   
+    border: none; 
+    height: 1px; 
+    background:#ddd;
+   
+} 
+
+.mPrice{
+    display: none;
+}
+
+.mCartSummary{
+    display: none;
+}
+
+.delete_cart{
+    color: blue;
+    cursor: default;
+}
+
+.delete_cart:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px){
+   
+    label {
+        color: black!important;
+    }
+    .cartSummary{
+        display: none;
+        
+    }
+    .mCartSummary{
+        display: inline-block;
+        position: relative;
+        width: 90%;
+        height: 200px;
+        border-radius: 5px 5px 5px 5px;
+        border-color: white;
+        box-shadow: 0 0 3px 4px rgb(214, 201, 201);
+        margin: 0px 18px;
+    }
+    
+    .priceNameDiv{
+        display: none;
+    }
+    .price{
+        display: none;
+    }
+    
+   .mPrice{
+       display: inline-block;
+   }
+
+
+    .contentDiv{
+        box-sizing: border-box;
+        width:70%;
+        display: inline-block;
+        
+        
+    }
+    .pimage{
+        width: 10%;
+        display: inline-block;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+   
+    .cartdiv{
+        width:100vw;   
+    }
+}

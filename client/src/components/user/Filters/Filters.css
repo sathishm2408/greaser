@@ -1,0 +1,167 @@
+.entireDiv{
+display: inline;
+}
+.filterIcon{
+    padding-left: 10px;
+    text-decoration: underline;
+}
+
+.filterIcon >i{
+    color: blue;
+}
+
+.filtersMainDiv{
+    float: left;
+    width: 17vw;
+    border-right: 2px solid #ddd;
+}
+
+
+
+.filterButton{
+    display: none;
+}
+.sortButton{
+    display: none;
+}
+
+.filterIcon{
+    font-size: 24px;
+}
+
+.firstFiltersDiv{
+    box-sizing: border-box;
+    padding-left: 18px;
+}
+
+.seeMoreDiv{
+    padding-left: 18px;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 18px;
+    margin: 0;
+    color:blue;
+}
+
+.seeMoreDiv:hover{
+    color: black;
+}
+
+.seeMoreDiv.hide{
+    margin-left: -100vw;
+}
+
+.secondFiltersDiv.hide{
+   position: absolute; 
+   margin-left:-100vw;
+}
+
+.secondFiltersDiv{
+    margin-top: -30px;
+    box-sizing: border-box;
+    left: 0;
+    width: 17vw;
+    padding-left: 18px;
+    
+}
+
+/* .secondFiltersDiv .abcd{
+    margin-top: -35px;
+} */
+.seeLessDiv{
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 18px;
+    color: blue;
+}
+
+
+
+.seeLessDiv:hover{
+    color:black;
+}
+
+.seeLessDiv.hide{
+    left: -100vw;
+}
+
+.sortNameDiv{
+    padding-left: 10px;
+    font-size: 24px;
+    text-decoration: underline;
+
+}
+.sortSubDiv{
+    margin-top: 2px;
+    padding-left: 18px;
+    overflow: hidden;
+}
+
+
+
+
+
+@media only screen and (max-width:768px){
+   
+   
+    .filtersMainDiv{
+        display: none;   
+    }
+    .filterButton{
+        margin-left: 10px;
+        display: inline-block;
+        width: 45vw;
+    }
+   .filtersMainDiv.show{
+       display: block;
+       margin-top: 10px;
+       margin-left: 15px;
+       position: absolute;
+       z-index: 999;
+   }
+   .sortButton{
+       margin-left: 25px;
+       display: inline-block;
+       width: 45vw;
+   }
+   .seeMoreDiv.hide{
+    left: -100vw;
+}
+
+.sortMainDiv{
+    display: none;
+}
+label{
+    
+    color: white !important;
+}
+
+.firstFiltersDiv{
+    width: 45vw;
+    background-color: #030000;
+}
+
+.secondFiltersDiv{
+    width: 45vw;
+    background-color: #030000;
+}
+
+.seeMoreDiv{
+    width: 45vw;
+    background-color: #030000;
+    color: white !important;
+}
+
+.filterIcon{
+    width: 45vw;
+    background-color: #030000;
+    color: white !important;
+}
+.seeLessDiv{
+    color: white !important;
+}
+
+
+
+
+}

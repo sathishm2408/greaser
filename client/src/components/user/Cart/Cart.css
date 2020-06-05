@@ -1,0 +1,17 @@
+
+.box1{
+    height:250px;
+    width:350px;
+    float:right;
+
+    border-radius:10px!important;
+    margin-right:15px!important;
+}
+@media only screen and (max-width: 768px){
+    .box1{
+        width:92vw;
+        height:35vh;
+        margin-right:2px;
+        margin-left:5px!important;
+    }
+}

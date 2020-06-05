@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProductCards from './ProductCards';
 import { connect } from 'react-redux';
-import { getViews } from '../actions/product';
+import { getViews } from '../../actions/product';
 import Chart from './Chart';
 
 import './productCards.css';

@@ -5,8 +5,9 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 
 
-const authRouter = require('./server/routes/index');
+const adminRouter = require('./server/routes/index');
 const productRouter = require('./server/routes/products');
+const consumerRouter = require('./server/routes/consumer');
 
 app.use(cors())
 app.use(express.json());
@@ -19,8 +20,9 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static('public'))
 
-app.use('/authService', authRouter);
+app.use('/admin', adminRouter);
 app.use('/products', productRouter);
+app.use('/consumer',consumerRouter);
 
 // app.use(multer({ dest: './client/public/uploads/',
 //     rename: function (fieldname, filename) {

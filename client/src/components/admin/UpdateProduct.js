@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter, Prompt } from 'react-router-dom';
-import { Button, Header, Modal, Icon, Input, Dropdown, Accordion } from 'semantic-ui-react';
+import { Button, Icon, Input, Dropdown, Accordion } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { getProductDetails, updateProduct } from '../actions/product';
+import { getProductDetails, updateProduct } from '../../actions/product';
 import './productCards.css';
-import cam from '../assets/cam.jpg'
+import cam from '../../assets/cam.jpg'
 
 class UpdateProduct extends Component {
     constructor(props) {
@@ -181,15 +181,15 @@ class UpdateProduct extends Component {
             pic4 = this.props.productDetails.images[3] ? this.state.baseUrl + this.props.productDetails.images[3] : ''
             pic5 = this.props.productDetails.images[4] ? this.state.baseUrl + this.props.productDetails.images[4] : ''
             console.log("rrrrr", gender);
-            if (pic1 == '')
+            if (pic1 === '')
                 noPic1 = true;
-            if (pic2 == '')
+            if (pic2 === '')
                 noPic2 = true;
-            if (pic3 == '')
+            if (pic3 === '')
                 noPic3 = true;
-            if (pic4 == '')
+            if (pic4 === '')
                 noPic4 = true;
-            if (pic5 == '')
+            if (pic5 === '')
                 noPic5 = true;
         }
 
@@ -382,7 +382,8 @@ class UpdateProduct extends Component {
                         <div className="AddProduct-field">
                             <label className="label-field">Description</label>
                             {
-                                description && <Input type="text" id="description" name="description" defaultValue={description} placeholder="Enter Description" />
+                                description && <textarea id="description" name="description" rows="4" cols="50" defaultValue={description} placeholder="Enter Description"></textarea>
+                                // <Input type="text" id="description" name="description" defaultValue={description} placeholder="Enter Description" />
                             }
                         </div>
                     </Accordion.Content>

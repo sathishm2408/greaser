@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ProductCards from './ProductCards';
 import { connect } from 'react-redux';
-import { getAllProducts, getFilteredProduct } from '../actions/product';
+import { getAllProducts, getFilteredProduct } from '../../actions/product';
 import './productCards.css';
 
 export class AdminHome extends Component {

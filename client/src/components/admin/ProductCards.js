@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {deleteProduct} from '../actions/product'
+import {deleteProduct} from '../../actions/product'
 import './productCards.css';
 
 class ProductCards extends Component {

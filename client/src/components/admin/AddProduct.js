@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { withRouter, Prompt } from 'react-router-dom';
 import { Button, Icon, Input, Dropdown, Accordion } from 'semantic-ui-react';
 import { connect } from 'react-redux';
-import { addProduct } from '../actions/product';
+import { addProduct } from '../../actions/product';
 import './productCards.css';
-import cam from '../assets/cam.jpg'
+import cam from '../../assets/cam.jpg'
 
 export class AddProduct extends Component {
     state = {
@@ -311,7 +311,8 @@ export class AddProduct extends Component {
                         </div>
                         <div className="AddProduct-field">
                             <label className="label-field">Description</label>
-                            <Input type="text" id="description" name="description" placeholder="Enter Description" />
+                            <textarea id="description" name="description" rows="4" cols="50" placeholder="Enter Description"></textarea>
+                            {/* <Input type="text" id="description" name="description" placeholder="Enter Description" /> */}
                         </div>
                     </Accordion.Content>
 

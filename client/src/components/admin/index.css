@@ -1,0 +1,105 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.home-img{
+  width: 100%;
+  height: 100%;
+}
+
+.loginButton {
+  all: unset;
+  padding: 8px;
+}
+
+.label-text{
+  width: 110px;
+  font-size: 20px;
+  margin-top: auto;
+}
+
+.login-submit{
+  margin-left:80px;
+}
+
+.login-cancel{
+  margin-left:45px;
+}
+
+.login-row{
+  margin:20px;
+  margin-left: 80px;
+}
+
+.signup-row{
+  margin:10px;
+  margin-left: 80px;
+}
+
+.modal-body{
+  padding-left: 40px;
+}
+
+input{
+  font-size: large;
+}
+
+.login-error{
+  color: crimson;
+  text-align:center;
+  padding-top: 15px;
+}
+
+.loginModal{
+  height: auto;
+  margin-top:200px !important;
+  margin-left:600px !important;
+}
+
+.modalHeader{
+  width: 50%;
+  height:65px;
+}
+
+.ui.modal>.header{
+  padding: 0px;
+}
+
+.ui.modal>.content{
+  padding-left: 60px;
+}
+
+.register{
+  margin-left: 70px;
+}
+
+.register:hover{
+  color:blue;
+  cursor: pointer;
+}
+
+.email-error{
+  color: crimson;
+  text-align:center;
+  padding: 0px;
+}
+
+.edited{
+  line-height: 50px;
+}
+
+.search{
+  height:40px;
+  margin-left: 30px;
+  margin-top: 10px
+}

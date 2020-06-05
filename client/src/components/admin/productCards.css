@@ -48,7 +48,7 @@
 }
 
 .ui.styled.accordion {
-    width: 70%;
+    width: 70% !important;
     margin-left: 15%;
     margin-top: 2%;
 }
@@ -90,4 +90,8 @@
 
 .img-padding{
     padding-left: 65px;
+}
+
+.p-2 {
+    padding: 1.5rem!important;
 }

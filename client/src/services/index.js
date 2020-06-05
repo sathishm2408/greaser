@@ -12,7 +12,7 @@ const getAllProducts = async () => {
 const loginCall = async (userId, password) => {
   let res = await axios({
     method: 'post',
-    url: 'http://localhost:3005/authService/users/login',
+    url: 'http://localhost:3005/admin/users/login',
     data: {
       emailId: userId,
       password: password
@@ -29,7 +29,7 @@ const loginCall = async (userId, password) => {
 const logout = async (token) => {
   let res = await axios({
     method: 'get',
-    url: 'http://localhost:3005/authService/users/logout',
+    url: 'http://localhost:3005/admin/users/logout',
     headers: { 'x-access-token': token }
   })
     .then((result) => result.data)
@@ -42,7 +42,7 @@ const logout = async (token) => {
 const signupService = async (bodyData) => {
   let res = await axios({
     method: 'post',
-    url: 'http://localhost:3005/authService/users/signup',
+    url: 'http://localhost:3005/admin/users/signup',
     data: {
       emailId: bodyData.signupId,
       firstName: bodyData.firstName,
