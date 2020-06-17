@@ -31,6 +31,8 @@ export class AdminHome extends Component {
 
             })
         }
+        else
+            data=[<h2>No Products Available in Inventory</h2>]
 
 
 
