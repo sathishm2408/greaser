@@ -27,7 +27,7 @@
     "react-alice-carousel": "^1.18.0",
     "react-bootstrap": "^1.0.0",
     "react-chartjs-2": "^2.9.0",
-    "validator": "^12.2.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "enzyme": "^3.11.0",
